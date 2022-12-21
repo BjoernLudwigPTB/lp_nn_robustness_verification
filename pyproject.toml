@@ -21,7 +21,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Mathematics",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
     "pyscipopt",
 ]
@@ -79,7 +79,7 @@ major_on_zero = false
 changelog_sections = "feature,fix,breaking,documentation,performance"
 changelog_components = "semantic_release.changelog.changelog_headers,semantic_release.changelog.compare_url"
 upload_to_repository = false
-upload_to_release = true
+upload_to_release = false
 hvcs = "gitlab"
 hvcs_domain = "gitlab1.ptb.de"
 commit_author= "Bjoern Ludwig <bjoern.ludwig@ptb.de>"
