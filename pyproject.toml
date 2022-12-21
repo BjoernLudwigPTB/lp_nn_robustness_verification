@@ -1,0 +1,100 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ilp_nn_robustness_verification"
+description = """
+This package accompanies my Master's thesis on GUM-compliant neural network robustness\
+verification and provides an implementation using PySCIPOpt.\
+"""
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = [
+    "robustness verification",
+    "neural networks",
+    "integer linear programming",
+]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+version = "0.0.0"
+dependencies = [
+    "pyscipopt",
+]
+[license]
+text = "MIT"
+file = "LICENSE"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "Flake8-pyproject",
+    "hypothesis[numpy]",
+    "mypy",
+    "pylint",
+    "pytest",
+    "pytest-cov",
+    "pytest-custom-exit-code",
+]
+docs = [
+    "myst-parser",
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+release = [
+    "python-semantic-release",
+]
+
+[tool.setuptools]
+license-files = ["LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--strict-markers --suppress-no-test-exit-code --color=yes"
+filterwarnings = "error"
+
+[tool.mypy]
+exclude = ["^build/", "^venv/"]
+scripts_are_modules = true
+warn_unused_ignores = true
+show_error_codes = true
+enable_error_code = "ignore-without-code"
+strict = true
+
+[[tool.mypy.overrides]]
+module = "setuptools.*"
+ignore_missing_imports = true
+
+[tool.semantic_release]
+branch = "main"
+version_toml = "pyproject.toml:project.version"
+version_variable = "docs/conf.py:version"
+major_on_zero = false
+changelog_sections = "feature,fix,breaking,documentation,performance"
+changelog_components = "semantic_release.changelog.changelog_headers,semantic_release.changelog.compare_url"
+upload_to_repository = false
+upload_to_release = true
+hvcs = "gitlab"
+hvcs_domain = "gitlab1.ptb.de"
+commit_author= "Bjoern Ludwig <bjoern.ludwig@ptb.de>"
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = "E203"
+exclude = "venv"
+
+[tool.pylint.format]
+# Maximum number of characters on a single line.
+max-line-length = 88
+
+[tool.pylint.typecheck]
+# List of members which are set dynamically and missed by pylint inference
+# system, and so shouldn't trigger E1101 when accessed. Python regular
+# expressions are accepted.
+#generated-members = "<package-name>.*"

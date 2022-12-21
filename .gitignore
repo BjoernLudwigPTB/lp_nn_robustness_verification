@@ -1,0 +1,26 @@
+#########################
+### Release artifacts ###
+#########################
+build/
+*.egg-info
+
+######################
+### Docs artifacts ###
+######################
+docs/_build
+docs/CHANGELOG.md
+docs/INSTALL.md
+docs/README.md
+
+######################
+### Test artifacts ###
+######################
+**/.hypothesis/
+**/.coverage/
+.__atomic-write*
+coverage.xml
+junit.xml
+
+############################
+### Experiment artifacts ###
+############################
