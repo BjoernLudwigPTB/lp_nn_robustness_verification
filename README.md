@@ -1,9 +1,9 @@
-# GUM-compliant_neural-network_uncertainty-propagation
+# Neural network robustness verification via Integer Linear Programming
 
 [![pipeline status](https://gitlab1.ptb.de/ludwig10_masters_thesis/ilp_nn_robustness_verification/badges/main/pipeline.svg)](https://gitlab1.ptb.de/ludwig10_masters_thesis/ilp_nn_robustness_verification/-/commits/main)
 [![Latest Release](https://gitlab1.ptb.de/ludwig10_masters_thesis/ilp_nn_robustness_verification/-/badges/release.svg)](https://gitlab1.ptb.de/ludwig10_masters_thesis/ilp_nn_robustness_verification/-/releases)
 
-This is the code written in conjunction with the first part of my Master's thesis on 
+This is the code written in conjunction with the second part of my Master's thesis on 
 GUM-compliant neural network robustness verification. The code was written for 
 _Python 3.10_.
 
