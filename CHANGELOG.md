@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.1 (2022-12-22)
+### Fix
+* **README:** Correct heading and description ([`d6a8d47`](https://gitlab1.ptb.de/ludwig10_masters_thesis/ilp_nn_robustness_verification/-/commit/d6a8d4766ec870409b811710061851b3eddcf110))
+
 ## v0.2.0 (2022-12-22)
 ### Feature
 * **data_types:** Introduce data_types module for more convenient coding and reading ([`38d2a8b`](https://gitlab1.ptb.de/ludwig10_masters_thesis/ilp_nn_robustness_verification/-/commit/38d2a8bfd5aa243a5c2b99b73dd99d7d635a80c5))
