@@ -48,6 +48,8 @@ keyring==23.13.1
     # via twine
 more-itertools==9.0.0
     # via jaraco-classes
+numpy==1.24.0
+    # via ilp-nn-robustness-verification (setup.py)
 packaging==22.0
     # via python-semantic-release
 pkginfo==1.9.2

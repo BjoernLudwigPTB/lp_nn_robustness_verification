@@ -37,6 +37,8 @@ mdurl==0.1.2
     # via markdown-it-py
 myst-parser==0.18.1
     # via ilp-nn-robustness-verification (setup.py)
+numpy==1.24.0
+    # via ilp-nn-robustness-verification (setup.py)
 packaging==22.0
     # via sphinx
 pygments==2.13.0

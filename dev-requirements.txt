@@ -47,7 +47,9 @@ mypy-extensions==0.4.3
     #   black
     #   mypy
 numpy==1.24.0
-    # via hypothesis
+    # via
+    #   hypothesis
+    #   ilp-nn-robustness-verification (setup.py)
 packaging==22.0
     # via pytest
 pathspec==0.10.3

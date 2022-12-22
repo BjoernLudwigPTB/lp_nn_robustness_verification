@@ -116,7 +116,9 @@ mypy-extensions==0.4.3
 myst-parser==0.18.1
     # via ilp-nn-robustness-verification (setup.py)
 numpy==1.24.0
-    # via hypothesis
+    # via
+    #   hypothesis
+    #   ilp-nn-robustness-verification (setup.py)
 packaging==22.0
     # via
     #   pytest

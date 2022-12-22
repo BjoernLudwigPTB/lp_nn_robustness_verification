@@ -4,6 +4,8 @@
 #
 #    pip-compile --resolver=backtracking
 #
+numpy==1.24.0
+    # via ilp-nn-robustness-verification (setup.py)
 pyscipopt==4.2.0
     # via ilp-nn-robustness-verification (setup.py)
 wheel==0.38.4
