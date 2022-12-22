@@ -3,7 +3,7 @@ import pytest
 from ilp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
-from ilp_nn_robustness_verification.data_types import Intervals, UncertainArray
+from ilp_nn_robustness_verification.data_types import UncertainArray
 
 
 @pytest.fixture(scope="session")
