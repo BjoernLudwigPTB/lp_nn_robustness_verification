@@ -20,6 +20,8 @@ click-log==0.4.0
     # via python-semantic-release
 colorama==0.4.6
     # via twine
+crlibm==1.0.3
+    # via pyinterval
 cryptography==38.0.4
     # via secretstorage
 docutils==0.19
@@ -58,6 +60,8 @@ pycparser==2.21
     # via cffi
 pygments==2.13.0
     # via readme-renderer
+pyinterval==1.2.0
+    # via ilp-nn-robustness-verification (setup.py)
 pyscipopt==4.2.0
     # via ilp-nn-robustness-verification (setup.py)
 python-gitlab==3.12.0
@@ -83,7 +87,9 @@ secretstorage==3.3.3
 semver==2.13.0
     # via python-semantic-release
 six==1.16.0
-    # via bleach
+    # via
+    #   bleach
+    #   pyinterval
 smmap==5.0.0
     # via gitdb
 tomlkit==0.11.6

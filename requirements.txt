@@ -4,9 +4,15 @@
 #
 #    pip-compile --resolver=backtracking
 #
+crlibm==1.0.3
+    # via pyinterval
 numpy==1.24.0
+    # via ilp-nn-robustness-verification (setup.py)
+pyinterval==1.2.0
     # via ilp-nn-robustness-verification (setup.py)
 pyscipopt==4.2.0
     # via ilp-nn-robustness-verification (setup.py)
+six==1.16.0
+    # via pyinterval
 wheel==0.38.4
     # via pyscipopt

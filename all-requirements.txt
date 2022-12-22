@@ -35,6 +35,8 @@ colorama==0.4.6
     # via twine
 coverage[toml]==7.0.0
     # via pytest-cov
+crlibm==1.0.3
+    # via pyinterval
 cryptography==38.0.4
     # via secretstorage
 dill==0.3.6
@@ -144,6 +146,8 @@ pygments==2.13.0
     # via
     #   readme-renderer
     #   sphinx
+pyinterval==1.2.0
+    # via ilp-nn-robustness-verification (setup.py)
 pylint==2.15.9
     # via ilp-nn-robustness-verification (setup.py)
 pyscipopt==4.2.0
@@ -185,7 +189,9 @@ secretstorage==3.3.3
 semver==2.13.0
     # via python-semantic-release
 six==1.16.0
-    # via bleach
+    # via
+    #   bleach
+    #   pyinterval
 smmap==5.0.0
     # via gitdb
 snowballstemmer==2.2.0
