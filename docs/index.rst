@@ -20,7 +20,11 @@ GUM-compliant neural network robustness verification
    :maxdepth: 1
    :caption: Code Reference:
 
+   ilp_nn_robustness_verification.pre_processing.rst
+   ilp_nn_robustness_verification.data_acquisition
+   ilp_nn_robustness_verification.type_aliases
    ilp_nn_robustness_verification.ilp
+   ilp_nn_robustness_verification.optimize
 
 Indices and tables
 ==================
