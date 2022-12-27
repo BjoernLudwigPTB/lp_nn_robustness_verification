@@ -53,6 +53,10 @@ class LinearInclusion:
         nn_params: NNParams = NNParams(),
     ):
         """Instantiate linear inclusion"""
+        assert (
+            len(uncertain_inputs.uncertain_values.values)
+            == nn_params.weights[0].shape[1]
+        )
         self.uncertain_inputs = uncertain_inputs
         self.activation = activation
         self.nn_params = nn_params
@@ -98,7 +102,14 @@ class LinearInclusion:
                 ]
                 for z_k in z_i
             ]
-            theta.append(Intervals(theta_i))
+            assert isinstance(theta_i, list)
+            for element in theta_i:
+                assert isinstance(element, interval)
+            theta.append(
+                Intervals(
+                    theta_i,
+                )
+            )
         self.theta = IntervalCollection(theta)
 
     def _compute_xi_is(self) -> None:
@@ -124,7 +135,12 @@ class LinearInclusion:
             r_i = []
             for xi_k, z_k in zip(xi_i, z_i):
                 r_i.append(self._taylors_residual(xi_k, z_k))
-            r_is.append(Intervals(r_i))
+            assert isinstance(r_i[-1], interval)
+            r_is.append(
+                Intervals(
+                    r_i,
+                )
+            )
         self.r_is = IntervalCollection(r_is)
 
     def _taylors_residual(self, xi_k: float, z_k: interval) -> interval:
