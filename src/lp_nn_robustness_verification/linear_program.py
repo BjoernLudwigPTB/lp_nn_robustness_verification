@@ -43,7 +43,7 @@ class RobustnessVerification:
 
     def _set_up_model(self) -> None:
         """Set up all the variables for the SCIP model"""
-        self.auxiliary_t = self.model.addVar(name="t", vtype="C")
+        self.auxiliary_t = self.model.addVar(name="t", lb=None)
         self._add_vars_x_i_in_theta_i()
         self._add_vars_z_i()
         self._add_linear_cons()
