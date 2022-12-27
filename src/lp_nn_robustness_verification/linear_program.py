@@ -48,6 +48,7 @@ class RobustnessVerification:
         self._add_vars_z_i()
         self._add_linear_cons()
         self._add_auxiliary_cons()
+        self._add_objective()
 
     def _add_vars_x_i_in_theta_i(self) -> None:
         for i_idx, theta_i in enumerate(self.linear_inclusion.theta):
@@ -119,6 +120,9 @@ class RobustnessVerification:
                     - self.x_is[len(self.linear_inclusion.theta) - 1, neuron_idx]
                     >= self.auxiliary_t
                 )
+
+    def _add_objective(self) -> None:
+        self.model.setObjective(self.auxiliary_t, "maximize")
 
     def solve(self, visualize: bool = True) -> str | None:
         """Actually solve the optimization problem
