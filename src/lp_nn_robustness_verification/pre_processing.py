@@ -63,12 +63,12 @@ class LinearInclusion:
         self.uncertain_inputs = uncertain_inputs
         self.activation = activation
         self.nn_params = nn_params
+        self._compute_z_is()
+        self._compute_xi_is()
         self.theta = IntervalCollection(
             (uncertain_inputs.intervals,),
         )
-        self._compute_z_is()
-        self._compute_xi_is()
-        self._compute_theta_is()
+        self._compute_and_append_theta_is()
         self._compute_r_is()
 
     def _compute_z_is(self) -> None:
@@ -92,7 +92,7 @@ class LinearInclusion:
             z_is,
         )
 
-    def _compute_theta_is(self) -> None:
+    def _compute_and_append_theta_is(self) -> None:
         r"""Compute the :math:`\Theta^{(i)}, i = 0, \ldots, \ell`
 
         For details see Equation 3.8 of Definition 3.2.10 in [Ludwig2023]_"""
