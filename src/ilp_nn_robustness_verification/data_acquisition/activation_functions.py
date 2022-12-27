@@ -4,17 +4,17 @@ __all__ = ["sigmoid", "Sigmoid", "sigmoid_prime"]
 
 import numpy as np
 
-from ..data_types import ActivationFunc
+from ..data_types import ActivationFunc, RealVector
 
 
-def sigmoid(val: float) -> float:
+def sigmoid(val: np.float64 | RealVector) -> np.float64 | RealVector:
     r"""Real-valued implementation of :math:`\sigma (x) := \frac{1}{1 + e^{-x}}`"""
-    return float(1 / (1 + np.exp(-val)))
+    return 1.0 / (1.0 + np.exp(-val))
 
 
-def sigmoid_prime(val: float) -> float:
+def sigmoid_prime(val: np.float64 | RealVector) -> np.float64 | RealVector:
     r"""Real-valued implementation of :math:`\sigma'(x):=\frac{e^x}{(1+e^{x})^2}`"""
-    return float(sigmoid(val) * (1 - sigmoid(val)))
+    return sigmoid(val) * (1.0 - sigmoid(val))
 
 
 Sigmoid = ActivationFunc(sigmoid, sigmoid_prime)
