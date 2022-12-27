@@ -33,7 +33,16 @@ class UncertainInputs:
             )
         else:
             self.uncertain_values = uncertain_values
+        assert (
+            len(self.uncertain_values.values.shape)
+            == len(self.uncertain_values.uncertainties.shape)
+            == 1
+        )
+        assert len(self.uncertain_values.values) == len(
+            self.uncertain_values.uncertainties
+        )
         self.intervals = self.build_intervals(self.uncertain_values)
+        assert len(self.intervals) == len(self.uncertain_values.values)
 
     @staticmethod
     def build_intervals(uncertain_values: UncertainArray) -> Intervals:
