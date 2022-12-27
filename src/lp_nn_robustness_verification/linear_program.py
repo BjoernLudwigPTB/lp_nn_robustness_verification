@@ -1,5 +1,4 @@
 """The actual implementation of the linear optimization problem."""
-from itertools import chain
 
 from numpy.testing import assert_equal
 from pyscipopt import Model, quicksum  # type: ignore[import]
@@ -79,15 +78,11 @@ class RobustnessVerification:
                 self.model.addCons(
                     self.z_is[i_idx, k_idx]
                     == quicksum(
-                        chain(
-                            (
-                                weight * self.x_is[i_idx - 1, j_idx]
-                                for j_idx, weight in enumerate(weight_vector)
-                            ),
-                            (bias,),
-                        )
-                    ),
-                    f"z_{k_idx}(x^({k_idx - 1}))",
+                        weight * self.x_is[i_idx - 1, j_idx]
+                        for j_idx, weight in enumerate(weight_vector)
+                    )
+                    + bias,
+                    f"z_{k_idx}^({i_idx})(x^({i_idx - 1}))",
                 )
 
     def _add_linear_cons(self) -> None:
@@ -95,21 +90,19 @@ class RobustnessVerification:
             zip(self.linear_inclusion.xi_is, self.linear_inclusion.r_is), start=1
         ):
             for neuron_idx, (xi_i_k, r_i_k) in enumerate(zip(xi_i, r_i)):
-                self.model.addCons(
+                linear_approximation = (
                     self.x_is[layer_idx, neuron_idx]
                     - float(self.linear_inclusion.activation.func(xi_i_k))
                     - float(self.linear_inclusion.activation.deriv(xi_i_k))
                     * (self.z_is[layer_idx, neuron_idx] - xi_i_k)
-                    - r_i_k[0].inf
-                    >= 0
                 )
                 self.model.addCons(
-                    self.x_is[layer_idx, neuron_idx]
-                    - float(self.linear_inclusion.activation.func(xi_i_k))
-                    - float(self.linear_inclusion.activation.deriv(xi_i_k))
-                    * (self.z_is[layer_idx, neuron_idx] - xi_i_k)
-                    - r_i_k[0].sup
-                    <= 0
+                    linear_approximation - r_i_k[0].inf >= 0,
+                    f"x_{neuron_idx}^({layer_idx}) upper half-space",
+                )
+                self.model.addCons(
+                    linear_approximation - r_i_k[0].sup <= 0,
+                    f"x_{neuron_idx}^({layer_idx}) lower half-space",
                 )
 
     def _add_auxiliary_cons(self) -> None:
@@ -118,7 +111,8 @@ class RobustnessVerification:
                 self.model.addCons(
                     self.x_is[len(self.linear_inclusion.theta) - 1, self.label]
                     - self.x_is[len(self.linear_inclusion.theta) - 1, neuron_idx]
-                    >= self.auxiliary_t
+                    >= self.auxiliary_t,
+                    f"x_{self.label}^(ell) - x_{neuron_idx}^(ell) >= t",
                 )
 
     def _add_objective(self) -> None:
