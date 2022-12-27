@@ -27,6 +27,18 @@ def linear_inclusion_instance() -> LinearInclusion:
     return LinearInclusion(activation=Sigmoid)
 
 
+@pytest.fixture(scope="session")
+def custom_linear_inclusion_instance() -> LinearInclusion:
+    return LinearInclusion(
+        UncertainInputs(UncertainArray(np.array([1.0, 2.0]), np.array([0.5, 1.0]))),
+        Sigmoid,
+        NNParams(
+            biases=(np.array([1.5, 2.5]),),
+            weights=(np.array([[2.0, 2.0], [3.0, 3.0]]),),
+        ),
+    )
+
+
 def test_default_linear_inclusion_has_z_is_tuple(
     linear_inclusion_instance: LinearInclusion,
 ) -> None:
@@ -59,15 +71,12 @@ def test_default_linear_inclusion_z_is_are_correct(
     )
 
 
-def test_custom_linear_inclusion_z_is_are_correct() -> None:
-    linear_inclusion = LinearInclusion(
-        UncertainInputs(UncertainArray(np.array([1.0, 2.0]), np.array([0.5, 1.0]))),
-        Sigmoid,
-        NNParams(
-            biases=np.array([[1.5, 2.5]]), weights=np.array([[[2.0, 2.0], [3.0, 3.0]]])
-        ),
+def test_custom_linear_inclusion_z_is_are_correct(
+    custom_linear_inclusion_instance: LinearInclusion,
+) -> None:
+    assert custom_linear_inclusion_instance.z_is == (
+        (interval([4.5, 10.5]), interval([7.0, 16.0])),
     )
-    assert linear_inclusion.z_is == ((interval([4.5, 10.5]), interval([7.0, 16.0])),)
 
 
 def test_default_linear_inclusion_has_theta_tuple(
@@ -109,14 +118,14 @@ def test_default_linear_inclusion_theta_are_correct(
 def test_default_linear_inclusion_has_xi_is_ndarray(
     linear_inclusion_instance: LinearInclusion,
 ) -> None:
-    assert isinstance(linear_inclusion_instance.xi_is, np.ndarray)
+    assert isinstance(linear_inclusion_instance.xi_is, tuple)
 
 
-def test_default_linear_inclusion_has_xi_is_of_length_similar_to_input_dimen(
+def test_default_linear_inclusion_xi_is_start_with_similar_length_to_inputs_dimen(
     linear_inclusion_instance: LinearInclusion,
 ) -> None:
     assert_equal(
-        linear_inclusion_instance.xi_is.shape[1],
+        len(linear_inclusion_instance.xi_is[0]),
         len(linear_inclusion_instance.uncertain_inputs.uncertain_values.values),
     )
 
@@ -127,15 +136,10 @@ def test_default_linear_inclusion_xi_is_are_correct(
     assert_equal(linear_inclusion_instance.xi_is, np.array([[0.5, 0.5]]))
 
 
-def test_custom_linear_inclusion_xi_is_are_correct() -> None:
-    linear_inclusion = LinearInclusion(
-        UncertainInputs(UncertainArray(np.array([1.0, 2.0]), np.array([0.5, 1.0]))),
-        Sigmoid,
-        NNParams(
-            biases=np.array([[1.5, 2.5]]), weights=np.array([[[2.0, 2.0], [3.0, 3.0]]])
-        ),
-    )
-    assert_equal(linear_inclusion.xi_is, np.array([[7.5, 11.5]]))
+def test_custom_linear_inclusion_xi_is_are_correct(
+    custom_linear_inclusion_instance: LinearInclusion,
+) -> None:
+    assert_equal(custom_linear_inclusion_instance.xi_is, np.array([[7.5, 11.5]]))
 
 
 def test_default_linear_inclusion_has_r_is_tuple(
@@ -218,7 +222,7 @@ def test_compute_values_label_for_random_input_and_random_params_is_correct(
     assert_equal(
         compute_values_label(
             UncertainInputs(UncertainArray(values, uncertainties)),
-            nn_params=NNParams(biases[np.newaxis, ...], weights[np.newaxis, ...]),
+            nn_params=NNParams((biases,), (weights,)),
         ),
         (weights @ values + biases).argmax(),
     )
@@ -248,7 +252,7 @@ def test_compute_values_label_for_random_inputs_of_zema_shape_is_correct(
     assert_equal(
         compute_values_label(
             UncertainInputs(UncertainArray(values, uncertainties)),
-            nn_params=NNParams(biases[np.newaxis, ...], weights[np.newaxis, ...]),
+            nn_params=NNParams((biases,), (weights,)),
         ),
         (weights @ values + biases).argmax(),
     )
