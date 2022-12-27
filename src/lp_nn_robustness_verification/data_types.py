@@ -79,10 +79,19 @@ class NNParams:
         biases: VectorOfRealVectors = (np.array([0.0, 0.0]),),
         weights: VectorOfRealMatrices = (np.array([[1.0, 0.0], [0.0, 1.0]]),),
     ):
-        assert len(biases) == len(weights)
+        assert len(biases) == len(weights), (
+            f"Somehow there are {len(biases)} of bias vectors and {len(weights)} "
+            f"weight matrices but these numbers should be equal, one for each layer"
+        )
         for bias_vector, weight_matrix in zip(biases, weights):
-            assert len(weight_matrix.shape) == 2
-            assert len(bias_vector) == weight_matrix.shape[0]
+            assert len(weight_matrix.shape) == 2, (
+                f"Somehow there is a weight array, that is not of the shape of a "
+                f"matrix but has shape {weight_matrix.shape}"
+            )
+            assert len(bias_vector) == weight_matrix.shape[0], (
+                f"Somehow one of the bias vectors' dimension ({bias_vector}), does "
+                f"not match the dimension of its weight matrix ({weight_matrix})"
+            )
         self.biases = biases
         self.weights = weights
 
