@@ -153,8 +153,9 @@ class LinearInclusion:
                 self.activation.func(z_k[0].inf),
                 self.activation.func(z_k[0].sup),
             ]
-            - self.activation.func(xi_k)
-            - self.activation.deriv(xi_k) * (z_k - xi_k)
+            - float(self.activation.func(xi_k))  # type: ignore[arg-type]
+            - float(self.activation.deriv(xi_k))  # type: ignore[arg-type]
+            * (z_k - xi_k)
         )
 
 
