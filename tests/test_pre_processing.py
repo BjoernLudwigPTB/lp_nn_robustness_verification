@@ -5,18 +5,18 @@ from hypothesis.extra import numpy as hnp
 from interval import interval
 from numpy.testing import assert_equal
 
-from ilp_nn_robustness_verification import pre_processing
-from ilp_nn_robustness_verification.data_acquisition.activation_functions import Sigmoid
-from ilp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
+from lp_nn_robustness_verification import pre_processing
+from lp_nn_robustness_verification.data_acquisition.activation_functions import Sigmoid
+from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
-from ilp_nn_robustness_verification.data_types import (
+from lp_nn_robustness_verification.data_types import (
     NNParams,
     RealMatrix,
     RealVector,
     UncertainArray,
 )
-from ilp_nn_robustness_verification.pre_processing import (
+from lp_nn_robustness_verification.pre_processing import (
     compute_values_label,
     LinearInclusion,
 )

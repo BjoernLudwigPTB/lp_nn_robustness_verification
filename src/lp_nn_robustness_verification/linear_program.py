@@ -4,8 +4,8 @@ from itertools import chain
 from numpy.testing import assert_equal
 from pyscipopt import Model, quicksum  # type: ignore[import]
 
-from ilp_nn_robustness_verification.data_types import RealVars
-from ilp_nn_robustness_verification.pre_processing import (
+from lp_nn_robustness_verification.data_types import RealVars
+from lp_nn_robustness_verification.pre_processing import (
     compute_values_label,
     LinearInclusion,
 )
@@ -96,16 +96,16 @@ class RobustnessVerification:
             for neuron_idx, (xi_i_k, r_i_k) in enumerate(zip(xi_i, r_i)):
                 self.model.addCons(
                     self.x_is[layer_idx, neuron_idx]
-                    - self.linear_inclusion.activation.func(xi_i_k)
-                    - self.linear_inclusion.activation.deriv(xi_i_k)
+                    - float(self.linear_inclusion.activation.func(xi_i_k))
+                    - float(self.linear_inclusion.activation.deriv(xi_i_k))
                     * (self.z_is[layer_idx, neuron_idx] - xi_i_k)
                     - r_i_k[0].inf
                     >= 0
                 )
                 self.model.addCons(
                     self.x_is[layer_idx, neuron_idx]
-                    - self.linear_inclusion.activation.func(xi_i_k)
-                    - self.linear_inclusion.activation.deriv(xi_i_k)
+                    - float(self.linear_inclusion.activation.func(xi_i_k))
+                    - float(self.linear_inclusion.activation.deriv(xi_i_k))
                     * (self.z_is[layer_idx, neuron_idx] - xi_i_k)
                     - r_i_k[0].sup
                     <= 0

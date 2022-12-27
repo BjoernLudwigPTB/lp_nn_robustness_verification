@@ -2,12 +2,12 @@ import numpy as np
 import pytest
 from _pytest.capture import CaptureFixture
 
-from ilp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
+from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
-from ilp_nn_robustness_verification.data_types import NNParams, UncertainArray
-from ilp_nn_robustness_verification.ilp import RobustnessVerification
-from ilp_nn_robustness_verification.pre_processing import LinearInclusion
+from lp_nn_robustness_verification.data_types import NNParams, UncertainArray
+from lp_nn_robustness_verification.linear_program import RobustnessVerification
+from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
 
 @pytest.fixture(scope="session")

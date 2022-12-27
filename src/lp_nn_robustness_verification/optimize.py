@@ -5,11 +5,11 @@ At the moment it is only possible to call it via:
 .. code-block:: shell
 
     $ pip install .
-    Processing /home/bjorn/code/ilp_nn_robustness_verification
+    Processing /home/bjorn/code/lp_nn_robustness_verification
       Installing build dependencies ... done
     [...]
-    Successfully installed ilp_nn_robustness_verification-[...]
-    $ python -m ilp_nn_robustness_verification.optimize
+    Successfully installed lp_nn_robustness_verification-[...]
+    $ python -m lp_nn_robustness_verification.optimize
 
 We might add command line parameters at a later time. For now please edit the main
 function at the very bottom of this file to change inputs.
@@ -17,12 +17,12 @@ function at the very bottom of this file to change inputs.
 import numpy as np
 from zema_emc_annotated.dataset import provide_zema_samples  # type: ignore[import]
 
-from ilp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
+from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
-from ilp_nn_robustness_verification.data_types import NNParams, UncertainArray
-from ilp_nn_robustness_verification.ilp import RobustnessVerification
-from ilp_nn_robustness_verification.pre_processing import LinearInclusion
+from lp_nn_robustness_verification.data_types import NNParams, UncertainArray
+from lp_nn_robustness_verification.linear_program import RobustnessVerification
+from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
 if __name__ == "__main__":
     zema_data = provide_zema_samples()

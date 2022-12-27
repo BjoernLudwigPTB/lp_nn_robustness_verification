@@ -7,10 +7,10 @@ from dataclasses import dataclass
 import numpy as np
 from interval import interval
 
-from ilp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
+from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
-from ilp_nn_robustness_verification.data_types import (
+from lp_nn_robustness_verification.data_types import (
     ActivationFunc,
     IntervalCollection,
     Intervals,

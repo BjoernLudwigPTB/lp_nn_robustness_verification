@@ -1,4 +1,4 @@
-:gitlab_url: https://gitlab1.ptb.de/ludwig10_masters_thesis/ilp_nn_robustness_verification
+:gitlab_url: https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification
 
 GUM-compliant neural network robustness verification
 ====================================================
@@ -20,11 +20,11 @@ GUM-compliant neural network robustness verification
    :maxdepth: 1
    :caption: Code Reference:
 
-   ilp_nn_robustness_verification.pre_processing.rst
-   ilp_nn_robustness_verification.data_acquisition
-   ilp_nn_robustness_verification.type_aliases
-   ilp_nn_robustness_verification.ilp
-   ilp_nn_robustness_verification.optimize
+   lp_nn_robustness_verification.pre_processing
+   lp_nn_robustness_verification.data_acquisition
+   lp_nn_robustness_verification.data_types
+   lp_nn_robustness_verification.linear_program
+   lp_nn_robustness_verification.optimize
 
 Indices and tables
 ==================

@@ -1,9 +1,9 @@
 import pytest
 
-from ilp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
+from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
-from ilp_nn_robustness_verification.data_types import UncertainArray
+from lp_nn_robustness_verification.data_types import UncertainArray
 
 
 @pytest.fixture(scope="session")

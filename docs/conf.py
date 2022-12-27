@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# ilp_nn_robustness_verification documentation build
+# lp_nn_robustness_verification documentation build
 # configuration file, created by copying PyDynamic's on Thu Dec 21 21:30:35 2022.
 #
 # This file is execfile()d with the current directory set to its
@@ -95,7 +95,7 @@ tutorials_source = os.path.abspath(
         os.path.dirname(__file__),
         "..",
         "src",
-        "ilp_nn_robustness_verification",
+        "lp_nn_robustness_verification",
         "examples",
     )
 )
@@ -140,7 +140,7 @@ myst_heading_anchors = 4
 root_doc = "index"
 
 # General information about the project.
-project = "ilp_nn_robustness_verification"
+project = "lp_nn_robustness_verification"
 copyright = "2022, B. Ludwig (PTB)"
 author = "B. Ludwig"
 
@@ -294,7 +294,7 @@ html_static_path: list[str] = []
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "ilp_nn_robustness_verification"
+htmlhelp_basename = "lp_nn_robustness_verification"
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -315,8 +315,8 @@ htmlhelp_basename = "ilp_nn_robustness_verification"
 latex_documents = [
     (
         root_doc,
-        "ilp_nn_robustness_verification.tex",
-        "ilp_nn_robustness_verification Documentation",
+        "lp_nn_robustness_verification.tex",
+        "lp_nn_robustness_verification Documentation",
         "B. Ludwig",
         "manual",
     ),
@@ -350,8 +350,8 @@ latex_domain_indices = True
 man_pages = [
     (
         root_doc,
-        "ilp_nn_robustness_verification",
-        "ilp_nn_robustness_verification Documentation",
+        "lp_nn_robustness_verification",
+        "lp_nn_robustness_verification Documentation",
         [author],
         1,
     )
@@ -369,10 +369,10 @@ man_show_urls = False
 # texinfo_documents = [
 #     (
 #         root_doc,
-#         "ilp_nn_robustness_verification",
-#         "ilp_nn_robustness_verification Documentation",
+#         "lp_nn_robustness_verification",
+#         "lp_nn_robustness_verification Documentation",
 #         author,
-#         "ilp_nn_robustness_verification",
+#         "lp_nn_robustness_verification",
 #         "One line description of project.",
 #         "Miscellaneous",
 #     ),

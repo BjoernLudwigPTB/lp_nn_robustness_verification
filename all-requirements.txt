@@ -15,7 +15,7 @@ attrs==22.2.0
 babel==2.11.0
     # via sphinx
 black==22.12.0
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 bleach==5.0.1
     # via readme-renderer
 certifi==2022.12.7
@@ -33,7 +33,7 @@ click-log==0.4.0
     # via python-semantic-release
 colorama==0.4.6
     # via twine
-coverage[toml]==7.0.0
+coverage[toml]==7.0.1
     # via pytest-cov
 crlibm==1.0.3
     # via pyinterval
@@ -49,22 +49,22 @@ docutils==0.17.1
     #   sphinx-rtd-theme
 dotty-dict==1.3.1
     # via python-semantic-release
-exceptiongroup==1.0.4
+exceptiongroup==1.1.0
     # via
     #   hypothesis
     #   pytest
 flake8==6.0.0
     # via
     #   flake8-pyproject
-    #   ilp-nn-robustness-verification (setup.py)
+    #   lp-nn-robustness-verification (setup.py)
 flake8-pyproject==1.2.2
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 gitdb==4.0.10
     # via gitpython
 gitpython==3.1.29
     # via python-semantic-release
 hypothesis[numpy]==6.61.0
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 idna==3.4
     # via requests
 imagesize==1.4.1
@@ -110,17 +110,17 @@ mdurl==0.1.2
 more-itertools==9.0.0
     # via jaraco-classes
 mypy==0.991
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 mypy-extensions==0.4.3
     # via
     #   black
     #   mypy
 myst-parser==0.18.1
-    # via ilp-nn-robustness-verification (setup.py)
-numpy==1.24.0
+    # via lp-nn-robustness-verification (setup.py)
+numpy==1.24.1
     # via
     #   hypothesis
-    #   ilp-nn-robustness-verification (setup.py)
+    #   lp-nn-robustness-verification (setup.py)
 packaging==22.0
     # via
     #   pytest
@@ -147,24 +147,24 @@ pygments==2.13.0
     #   readme-renderer
     #   sphinx
 pyinterval==1.2.0
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 pylint==2.15.9
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 pyscipopt==4.2.0
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 pytest==7.2.0
     # via
-    #   ilp-nn-robustness-verification (setup.py)
+    #   lp-nn-robustness-verification (setup.py)
     #   pytest-cov
     #   pytest-custom-exit-code
 pytest-cov==4.0.0
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 pytest-custom-exit-code==0.3.0
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 python-gitlab==3.12.0
     # via python-semantic-release
 python-semantic-release==7.32.2
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 pytz==2022.7
     # via babel
 pyyaml==6.0
@@ -200,11 +200,11 @@ sortedcontainers==2.4.0
     # via hypothesis
 sphinx==5.3.0
     # via
-    #   ilp-nn-robustness-verification (setup.py)
+    #   lp-nn-robustness-verification (setup.py)
     #   myst-parser
     #   sphinx-rtd-theme
 sphinx-rtd-theme==1.1.1
-    # via ilp-nn-robustness-verification (setup.py)
+    # via lp-nn-robustness-verification (setup.py)
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
 sphinxcontrib-devhelp==1.0.2

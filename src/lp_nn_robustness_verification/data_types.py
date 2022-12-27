@@ -59,7 +59,7 @@ class UncertainArray(NamedTuple):
 class ActivationFunc(NamedTuple):
     """A representation of a real-valued, scalar function with its first derivative"""
 
-    func: RealScalarFunction = lambda x: np.full(1, x)
+    func: RealScalarFunction = lambda x: np.full(1, x) if isinstance(x, float) else x
     """the function itself"""
     deriv: RealScalarFunction = lambda x: np.ones(1)
     """the function's derivative"""

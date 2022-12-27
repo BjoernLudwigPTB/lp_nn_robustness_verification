@@ -20,8 +20,8 @@ def sigmoid_prime(val: np.float64 | RealVector) -> np.float64 | RealVector:
 Sigmoid = ActivationFunc(sigmoid, sigmoid_prime)
 """Provides an interface to the sigmoid activation function and its derivative
 
-func : :data:`~ilp_nn_robustness_verification.type_aliases.RealScalarFunction`
+func : :data:`~lp_nn_robustness_verification.type_aliases.RealScalarFunction`
     the real-valued :func:`sigmoid` activation function
-deriv : :data:`~ilp_nn_robustness_verification.type_aliases.RealScalarFunction`
+deriv : :data:`~lp_nn_robustness_verification.type_aliases.RealScalarFunction`
     the first derivative :func:`sigmoid_prime` of the real-valued activation function
 """

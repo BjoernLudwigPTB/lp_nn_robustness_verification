@@ -15,17 +15,17 @@ pip install --user .
 ```
 
 This will install the current version into your local folder of third-party libraries. 
-Note that ilp_nn_robustness_verification runs with **Python 
+Note that lp_nn_robustness_verification runs with **Python 
 version 3.10**. Usage in any Python environment on your computer is then possible by
 
 ```python
-import ilp_nn_robustness_verification
+import lp_nn_robustness_verification
 ```
 
 or, for example, for the custom activation function QuadLU:
 
 ```python
-from ilp_nn_robustness_verification import ilp
+from lp_nn_robustness_verification import linear_program
 ```
 
 ### Updating to the newest version
@@ -39,7 +39,7 @@ pip install --user .
 ## Proper Python setup with virtual environment  (**recommended**)
 
 The setup described above allows the quick and easy use of
-ilp_nn_robustness_verification, but it also has its downsides. 
+lp_nn_robustness_verification, but it also has its downsides. 
 When working with Python we should rather always work in so-called virtual 
 environments, in which our project specific dependencies are satisfied without 
 polluting or breaking other projects' dependencies and to avoid breaking all your 
@@ -52,7 +52,7 @@ If you are not familiar with [Python virtual environments
 motivation and an insight into the mechanism in the
 [official docs](https://docs.python.org/3/tutorial/venv.html).
 
-You have the option to set up ilp_nn_robustness_verification using the Python 
+You have the option to set up lp_nn_robustness_verification using the Python 
 built-in tool `venv`. The commands differ slightly between [Windows
 ](#create-a-venv-python-environment-on-windows) and [Mac/Linux
 ](#create-a-venv-python-environment-on-mac--linux).
@@ -64,12 +64,12 @@ a folder of your choice.
 
 ```shell
 PS C:> cd C:\LOCAL\PATH\TO\ENVS
-PS C:\LOCAL\PATH\TO\ENVS> py -3 -m venv ilp_nn_robustness_verification_venv
-PS C:\LOCAL\PATH\TO\ENVS> ilp_nn_robustness_verification_venv\Scripts\activate
+PS C:\LOCAL\PATH\TO\ENVS> py -3 -m venv lp_nn_robustness_verification_venv
+PS C:\LOCAL\PATH\TO\ENVS> lp_nn_robustness_verification_venv\Scripts\activate
 ```
 
 Proceed to [the next step
-](#install-ilp_nn_robustness_verification-via-pip).
+](#install-lp_nn_robustness_verification-via-pip).
 
 #### Create a `venv` Python environment on Mac & Linux
 
@@ -78,49 +78,49 @@ of your choice.
 
 ```shell
 $ cd /LOCAL/PATH/TO/ENVS
-$ python3 -m venv ilp_nn_robustness_verification_venv
-$ source ilp_nn_robustness_verification_venv/bin/activate
+$ python3 -m venv lp_nn_robustness_verification_venv
+$ source lp_nn_robustness_verification_venv/bin/activate
 ```
 
 Proceed to [the next step
-](#install-ilp_nn_robustness_verification-via-pip).
+](#install-lp_nn_robustness_verification-via-pip).
 
-### Install ilp_nn_robustness_verification via `pip`
+### Install lp_nn_robustness_verification via `pip`
 
 Once you activated your virtual environment, you can install
-ilp_nn_robustness_verification via:
+lp_nn_robustness_verification via:
 
 ```shell
 pip install .
 ```
 
 ```shell
-Collecting ilp_nn_robustness_verification
+Collecting lp_nn_robustness_verification
 [...]
-Successfully installed ilp_nn_robustness_verification-[...] [...]
+Successfully installed lp_nn_robustness_verification-[...] [...]
 ```
 
 That's it!
 
 ### Install known to work dependencies' versions
 
-In case errors arise within ilp_nn_robustness_verification, 
+In case errors arise within lp_nn_robustness_verification, 
 the first thing you can try is installing the known to work configuration of 
 dependencies against which we run our test suite. This you can easily achieve with 
 our requirements file. This is done with the following sequence of commands after 
 activating:
 
 ```shell
-(ilp_nn_robustness_verification_venv) $ pip install --upgrade pip-tools
+(lp_nn_robustness_verification_venv) $ pip install --upgrade pip-tools
 Collecting pip-tools
 [...]
 Successfully installed pip-tools-6.11.0
-(ilp_nn_robustness_verification_venv) $ python --version
+(lp_nn_robustness_verification_venv) $ python --version
 Python 3.10.7
-(ilp_nn_robustness_verification_venv) $ python -m piptools sync requirements.txt 
+(lp_nn_robustness_verification_venv) $ python -m piptools sync requirements.txt 
 requirements.txt
 Collecting [...]
 [...]
 Successfully installed [...]
-(ilp_nn_robustness_verification_venv) $
+(lp_nn_robustness_verification_venv) $
 ```

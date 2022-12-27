@@ -3,7 +3,7 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ilp_nn_robustness_verification"
+name = "lp_nn_robustness_verification"
 description = """
 This package accompanies my Master's thesis on GUM-compliant neural network robustness\
 verification and provides an implementation using PySCIPOpt.\
@@ -13,7 +13,7 @@ requires-python = ">=3.10"
 keywords = [
     "robustness verification",
     "neural networks",
-    "integer linear programming",
+    "linear programming",
 ]
 classifiers = [
     "Development Status :: 1 - Planning",
