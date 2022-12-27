@@ -69,15 +69,15 @@ class ActivationFunc(NamedTuple):
 class NNParams:
     """A representation of a neural network's parameters"""
 
-    biases: VectorOfRealVectors = np.array([[0.0, 0.0]])
+    biases: VectorOfRealVectors
     """The bias vectors of the neural network"""
-    weights: VectorOfRealMatrices = np.array([[[1.0, 0.0], [0.0, 1.0]]])
+    weights: VectorOfRealMatrices
     """The weights matrices of the neural network"""
 
     def __init__(
         self,
-        biases: VectorOfRealVectors = np.array([[0.0, 0.0]]),
-        weights: VectorOfRealMatrices = np.array([[[1.0, 0.0], [0.0, 1.0]]]),
+        biases: VectorOfRealVectors = (np.array([0.0, 0.0]),),
+        weights: VectorOfRealMatrices = (np.array([[1.0, 0.0], [0.0, 1.0]]),),
     ):
         assert len(biases) == len(weights)
         for bias_vector, weight_matrix in zip(biases, weights):
