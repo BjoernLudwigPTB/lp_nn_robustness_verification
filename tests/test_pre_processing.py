@@ -1,14 +1,25 @@
 import numpy as np
 import pytest
+from hypothesis import given, settings, strategies as hst
+from hypothesis.extra import numpy as hnp
 from interval import interval
 from numpy.testing import assert_equal
 
+from ilp_nn_robustness_verification import pre_processing
 from ilp_nn_robustness_verification.data_acquisition.activation_functions import Sigmoid
 from ilp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
-from ilp_nn_robustness_verification.pre_processing import LinearInclusion
-from ilp_nn_robustness_verification.data_types import NNParams, UncertainArray
+from ilp_nn_robustness_verification.data_types import (
+    NNParams,
+    RealMatrix,
+    RealVector,
+    UncertainArray,
+)
+from ilp_nn_robustness_verification.pre_processing import (
+    compute_values_label,
+    LinearInclusion,
+)
 
 
 @pytest.fixture(scope="session")
@@ -156,4 +167,88 @@ def test_default_linear_inclusion_r_is_are_correct(
             interval([-0.23996118730265184, 0.22610110352894755]),
             interval([-0.23996118730265184, 0.22610110352894755]),
         ),
+    )
+
+
+def test_pre_processing_has_compute_values_label() -> None:
+    assert hasattr(pre_processing, "compute_values_label")
+
+
+def test_compute_values_label_is_correct() -> None:
+    assert_equal(compute_values_label(), 0)
+
+
+@given(
+    hnp.arrays(
+        np.float64,
+        2,
+        elements=hst.floats(min_value=-1e291, max_value=1e291),
+    ),
+    hnp.arrays(np.float64, 2),
+)
+def test_default_compute_values_label_for_random_input_is_correct(
+    values: RealVector, uncertainties: RealVector
+) -> None:
+    assert_equal(
+        compute_values_label(UncertainInputs(UncertainArray(values, uncertainties))),
+        values.argmax(),
+    )
+
+
+@given(
+    hnp.arrays(
+        np.float64,
+        2,
+        elements=hst.floats(min_value=-1e145, max_value=1e145),
+    ),
+    hnp.arrays(np.float64, 2),
+    hnp.arrays(np.float64, 2),
+    hnp.arrays(
+        np.float64,
+        (2, 2),
+        elements=hst.floats(min_value=-1e145, max_value=1e145),
+    ),
+)
+def test_compute_values_label_for_random_input_and_random_params_is_correct(
+    values: RealVector,
+    uncertainties: RealVector,
+    biases: RealVector,
+    weights: RealMatrix,
+) -> None:
+    assert_equal(
+        compute_values_label(
+            UncertainInputs(UncertainArray(values, uncertainties)),
+            nn_params=NNParams(biases[np.newaxis, ...], weights[np.newaxis, ...]),
+        ),
+        (weights @ values + biases).argmax(),
+    )
+
+
+@given(
+    hnp.arrays(
+        np.float64,
+        11,
+        elements=hst.floats(min_value=-1e145, max_value=1e145),
+    ),
+    hnp.arrays(np.float64, 11, elements=hst.floats(allow_nan=False)),
+    hnp.arrays(np.float64, 3, elements=hst.floats(allow_nan=False)),
+    hnp.arrays(
+        np.float64,
+        (3, 11),
+        elements=hst.floats(min_value=-1e145, max_value=1e145),
+    ),
+)
+@settings(deadline=None)
+def test_compute_values_label_for_random_inputs_of_zema_shape_is_correct(
+    values: RealVector,
+    uncertainties: RealVector,
+    biases: RealVector,
+    weights: RealMatrix,
+) -> None:
+    assert_equal(
+        compute_values_label(
+            UncertainInputs(UncertainArray(values, uncertainties)),
+            nn_params=NNParams(biases[np.newaxis, ...], weights[np.newaxis, ...]),
+        ),
+        (weights @ values + biases).argmax(),
     )
