@@ -17,7 +17,8 @@ def custom_linear_inclusion() -> LinearInclusion:
             UncertainArray(np.array([0.5, 1.5, 2.5]), np.array([0.5, 0.5, 0.5]))
         ),
         nn_params=NNParams(
-            np.array([[0.0, 0.0]]), np.array([[[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]])
+            (np.array([0.0, 0.0]),),
+            (np.array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]),),
         ),
     )
 

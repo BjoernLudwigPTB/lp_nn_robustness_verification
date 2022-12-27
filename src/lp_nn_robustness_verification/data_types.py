@@ -27,9 +27,9 @@ RealMatrix: TypeAlias = NDArray[np.float64]
 """A real matrix represented by a :class:`np.ndarray <numpy.ndarray>`"""
 RealVector: TypeAlias = NDArray[np.float64]
 """A real vector represented by a :class:`np.ndarray <numpy.ndarray>`"""
-VectorOfRealVectors: TypeAlias = NDArray[np.float64]
+VectorOfRealVectors: TypeAlias = tuple[NDArray[np.float64], ...]
 """A vector of real vectors represented by a :class:`np.ndarray <numpy.ndarray>`"""
-VectorOfRealMatrices: TypeAlias = NDArray[np.float64]
+VectorOfRealMatrices: TypeAlias = tuple[NDArray[np.float64], ...]
 """A vector of real matrices represented by a :class:`np.ndarray <numpy.ndarray>`"""
 RealScalarFunction: TypeAlias = Callable[
     [np.float64 | RealVector], np.float64 | RealVector
