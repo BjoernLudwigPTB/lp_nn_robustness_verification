@@ -56,6 +56,9 @@ class LinearInclusion:
         assert (
             len(uncertain_inputs.uncertain_values.values)
             == nn_params.weights[0].shape[1]
+        ), (
+            "Somehow the input values' and the first weight matrix' dimensions do not "
+            "match"
         )
         self.uncertain_inputs = uncertain_inputs
         self.activation = activation
@@ -102,9 +105,15 @@ class LinearInclusion:
                 ]
                 for z_k in z_i
             ]
-            assert isinstance(theta_i, list)
+            assert isinstance(theta_i, list), (
+                f"Somehow one of the theta^(i)s ended up not being a list of "
+                f"intervals but a {type(theta_i)} of intervals"
+            )
             for element in theta_i:
-                assert isinstance(element, interval)
+                assert isinstance(element, interval), (
+                    f"Somehow one of the components of theta ended up not being an "
+                    f"interval but a {type(element)}"
+                )
             theta.append(
                 Intervals(
                     theta_i,
@@ -123,7 +132,15 @@ class LinearInclusion:
             for z_k in z_i:
                 xi_ks.append(z_k.midpoint[0].inf)
             xi_is.append(np.array(xi_ks))
-        self.xi_is = np.array(xi_is)
+            assert len(xi_ks) == len(z_i), (
+                f"Somehow there is not one xi_k^(i) for every of the {len(z_i)}, "
+                f"z_k^(i), but only {len(xi_ks)}"
+            )
+        assert len(xi_is) == len(self.z_is), (
+            f"Somehow there is not one xi^(i) for every of the {len(self.z_is)} z^(i), "
+            f"but only {len(xi_is)}"
+        )
+        self.xi_is = tuple(xi_is)
 
     def _compute_r_is(self) -> None:
         """Compute the residual terms the linear inclusions linear approximation
@@ -135,7 +152,9 @@ class LinearInclusion:
             r_i = []
             for xi_k, z_k in zip(xi_i, z_i):
                 r_i.append(self._taylors_residual(xi_k, z_k))
-            assert isinstance(r_i[-1], interval)
+            assert isinstance(
+                r_i[-1], interval
+            ), f"Somehow r^(i) ended up not being an interval but a {type(r_i[-1])}"
             r_is.append(
                 Intervals(
                     r_i,
