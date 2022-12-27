@@ -156,3 +156,30 @@ class LinearInclusion:
             - self.activation.func(xi_k)
             - self.activation.deriv(xi_k) * (z_k - xi_k)
         )
+
+
+def compute_values_label(
+    uncertain_inputs: UncertainInputs = UncertainInputs(),
+    activation: ActivationFunc = ActivationFunc(),
+    nn_params: NNParams = NNParams(),
+) -> int:
+    """Compute the index of the maximum of the result vector of the values' forward pass
+
+    Parameters
+    ----------
+    uncertain_inputs: UncertainInputs, optional
+        the values with associated uncertainties and resulting
+        intervals, defaults to the default
+        :class:`~.data_acquisition.uncertain_inputs.UncertainInputs` instance
+    activation : ActivationFunc, optional
+         the activation function and its derivative, defaults to the default
+         :class:`~.type_aliases.ActivationFunc` instance
+    nn_params : NNParams, optional
+        the neural networks parameters, i.e. a tuple of bias vectors and weight
+        matrices, defaults to the default
+        :class:`~.type_aliases.NNParams` instance
+    """
+    x_i = uncertain_inputs.uncertain_values.values
+    for biases, weight_matrix in nn_params:
+        x_i = activation.func(weight_matrix @ x_i + biases)  # type: ignore[assignment]
+    return int(x_i.argmax())
