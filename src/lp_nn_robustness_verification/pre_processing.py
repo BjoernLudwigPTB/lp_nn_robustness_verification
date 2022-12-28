@@ -58,7 +58,9 @@ class LinearInclusion:
             == nn_params.weights[0].shape[1]
         ), (
             "Somehow the input values' and the first weight matrix' dimensions do not "
-            "match"
+            f"match, as we have {len(uncertain_inputs.uncertain_values.values)} values "
+            f"but the weight matrix has shape {nn_params.weights[0].shape}, such that "
+            f"they cannot be multiplied with each other"
         )
         self.uncertain_inputs = uncertain_inputs
         self.activation = activation
