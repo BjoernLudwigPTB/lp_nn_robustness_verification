@@ -65,63 +65,47 @@ class LinearInclusion:
         self.uncertain_inputs = uncertain_inputs
         self.activation = activation
         self.nn_params = nn_params
-        self._compute_z_is()
+        self._compute_z_is_and_theta()
         self._compute_xi_is()
-        self.theta = IntervalCollection(
-            (uncertain_inputs.intervals,),
-        )
-        self._compute_and_append_theta_is()
         self._compute_r_is()
 
-    def _compute_z_is(self) -> None:
-        """Compute the result of the interval extension of the linear transformation
+    def _compute_z_is_and_theta(self) -> None:
+        r"""Compute the :math:`z^{(i)}` and :math:`\Theta^{(i)}, i = 1, \ldots, n^{(i)}`
 
-        For details see Equation 3.7 of Definition 3.2.10 in [Ludwig2023]_.
+        For details see Equations 3.7 and 3.8 of Definition 3.2.10 in [Ludwig2023]_.
         """
         z_is = []
+        theta_is = [self.uncertain_inputs.theta_0]
         for biases, weight_matrix in self.nn_params:
             z_i = []
             for k_idx, (bias, weight_vector) in enumerate(zip(biases, weight_matrix)):
                 z_i.append(float(bias))
                 for j_idx, weight in enumerate(weight_vector):
-                    z_i[k_idx] += float(weight) * self.uncertain_inputs.intervals[j_idx]
-            z_is.append(
+                    z_i[k_idx] += float(weight) * theta_is[-1][j_idx]
+            z_is.append(Intervals(z_i))
+            theta_i = []
+            for z_k in z_is[-1]:
+                theta_i.append(
+                    interval[
+                        self.activation.func(z_k[0].inf),
+                        self.activation.func(z_k[0].sup),
+                    ]
+                )
+                assert isinstance(theta_i[-1], interval), (
+                    f"Somehow one of the components of theta ended up not being an "
+                    f"interval but a {type(theta_i[-1])}"
+                )
+            theta_is.append(
                 Intervals(
-                    z_i,
+                    theta_i,
                 )
             )
         self.z_is = IntervalCollection(
             z_is,
         )
-
-    def _compute_and_append_theta_is(self) -> None:
-        r"""Compute the :math:`\Theta^{(i)}, i = 0, \ldots, \ell`
-
-        For details see Equation 3.8 of Definition 3.2.10 in [Ludwig2023]_"""
-        theta = list(self.theta)
-        for z_i in self.z_is:
-            theta_i = [
-                interval[
-                    self.activation.func(z_k[0].inf),
-                    self.activation.func(z_k[0].sup),
-                ]
-                for z_k in z_i
-            ]
-            assert isinstance(theta_i, list), (
-                f"Somehow one of the theta^(i)s ended up not being a list of "
-                f"intervals but a {type(theta_i)} of intervals"
-            )
-            for element in theta_i:
-                assert isinstance(element, interval), (
-                    f"Somehow one of the components of theta ended up not being an "
-                    f"interval but a {type(element)}"
-                )
-            theta.append(
-                Intervals(
-                    theta_i,
-                )
-            )
-        self.theta = IntervalCollection(theta)
+        self.theta = IntervalCollection(
+            theta_is,
+        )
 
     def _compute_xi_is(self) -> None:
         """Compute the midpoints of the intervals of the linear transformation's results
