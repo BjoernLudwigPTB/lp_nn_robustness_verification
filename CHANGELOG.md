@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2022-12-28)
+### Feature
+* **optimize:** Introduce creation of deeper network parameters according to pytorch implementation ([`d4cf1f8`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/d4cf1f8038bf5fcd3ce112f57b7faf37d6336cc5))
+* **generate_nn_params:** Introduce random generation of neural network parameters ([`dea1cc7`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/dea1cc749abf883c46161dc231c6798db39f8eb0))
+* **optimize:** Introduce script to set up data and execute optimizer ([`961fc1a`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/961fc1a1a8253bf1da5d4ba70272ac46b06286fa))
+* **pre_processing:** Introduce compute_values_label to determine an inputs label ([`d9bea2c`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/d9bea2c94b0c195966d3a052884697d7025ff9a9))
+* **ilp:** Introduce linear optimization problem ([`628346f`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/628346f061236953cb672b4b66d4ff635309f185))
+
+### Fix
+* **pre_processing:** Fix bug in computation of z^(i)s and Theta^(i)s ([`b25f752`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/b25f7527ab15a3b6de278831f7a6bed8d377cbe1))
+* **linear_program:** Set t to be unbounded from below ([`ca5785b`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/ca5785b033ae3c90f79bc383fd46af28c2779016))
+* **linear_program:** Add objective to linear program ([`8d0682f`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/8d0682fe0154db514112583cc3750578f23afe63))
+* **NNParams:** Fix default value creation and switch to tuple allowing differently sized layers ([`fdb002c`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/fdb002c049791a7503297bac28a0cc880615ea1b))
+* **sigmoid:** Correct type hints ([`d70ae2c`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/d70ae2c01a9bda52626d9629132be298e1458112))
+* **pre_processing:** Introduce required type cast and mypy ignore expression ([`1a9f1bb`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/1a9f1bbf1958cebef96426b6e22e5a23400f4ac7))
+
 ## v0.2.1 (2022-12-22)
 ### Fix
 * **README:** Correct heading and description ([`d6a8d47`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/d6a8d4766ec870409b811710061851b3eddcf110))
