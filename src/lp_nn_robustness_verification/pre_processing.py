@@ -189,7 +189,7 @@ def compute_values_label(
     ----------
     uncertain_inputs: UncertainInputs, optional
         the values with associated uncertainties and resulting
-        intervals, defaults to the default
+        theta_0, defaults to the default
         :class:`~.data_acquisition.uncertain_inputs.UncertainInputs` instance
     activation : ActivationFunc, optional
          the activation function and its derivative, defaults to the default

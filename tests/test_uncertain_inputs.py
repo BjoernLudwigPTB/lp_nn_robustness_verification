@@ -30,8 +30,8 @@ def test_default_init_uncertain_inputs_values_are_uncertain_array(
 def test_default_init_uncertain_inputs_has_intervals(
     uncertain_inputs: UncertainInputs,
 ) -> None:
-    assert hasattr(uncertain_inputs, "intervals")
+    assert hasattr(uncertain_inputs, "theta_0")
 
 
 def test_default_init_intervals_are_tuple(uncertain_inputs: UncertainInputs) -> None:
-    assert isinstance(uncertain_inputs.intervals, tuple)
+    assert isinstance(uncertain_inputs.theta_0, tuple)

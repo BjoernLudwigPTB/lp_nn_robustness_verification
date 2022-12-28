@@ -23,7 +23,7 @@ class UncertainInputs:
     """
 
     uncertain_values: UncertainArray
-    intervals: Intervals
+    theta_0: Intervals
 
     def __init__(self, uncertain_values: UncertainArray | None = None) -> None:
         """Uncertain inputs i.e. an array of values and an array of uncertainties"""
@@ -50,17 +50,16 @@ class UncertainInputs:
             f"but the values are of length {len(self.uncertain_values.values)} and "
             f"the uncertainties of length {len(self.uncertain_values.uncertainties)}"
         )
-        self.intervals = self.build_intervals(self.uncertain_values)
-        assert len(self.intervals) == len(self.uncertain_values.values), (
+        self.theta_0 = self._build_theta_0()
+        assert len(self.theta_0) == len(self.uncertain_values.values), (
             f"Somehow there were not as many intervals calculated as there are values, "
-            f"but there are {len(self.intervals)} intervals and each "
+            f"but there are {len(self.theta_0)} intervals and each "
             f"{len(self.uncertain_values.values)} values and uncertainties"
         )
 
-    @staticmethod
-    def build_intervals(uncertain_values: UncertainArray) -> Intervals:
+    def _build_theta_0(self) -> Intervals:
         """Construct the interval arithmetically enabled datastructure"""
         return Intervals(
             interval[value - uncertainty, value + uncertainty]
-            for value, uncertainty in zip(*uncertain_values)
+            for value, uncertainty in zip(*self.uncertain_values)
         )
