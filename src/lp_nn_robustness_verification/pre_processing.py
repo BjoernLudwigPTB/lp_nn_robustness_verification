@@ -179,11 +179,11 @@ def compute_values_label(
         :class:`~.data_acquisition.uncertain_inputs.UncertainInputs` instance
     activation : ActivationFunc, optional
          the activation function and its derivative, defaults to the default
-         :class:`~.type_aliases.ActivationFunc` instance
+         :class:`~.data_types.ActivationFunc` instance
     nn_params : NNParams, optional
         the neural networks parameters, i.e. a tuple of bias vectors and weight
         matrices, defaults to the default
-        :class:`~.type_aliases.NNParams` instance
+        :class:`~.data_types.NNParams` instance
     """
     x_i = uncertain_inputs.uncertain_values.values
     for biases, weight_matrix in nn_params:
