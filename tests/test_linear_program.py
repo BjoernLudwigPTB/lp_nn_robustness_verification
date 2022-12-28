@@ -14,7 +14,7 @@ from lp_nn_robustness_verification.pre_processing import LinearInclusion
 def custom_linear_inclusion() -> LinearInclusion:
     return LinearInclusion(
         uncertain_inputs=UncertainInputs(
-            UncertainArray(np.array([0.5, 1.5, 2.5]), np.array([0.5, 0.5, 0.5]))
+            UncertainArray(np.array([0.0, 0.5, 1.0]), np.array([0.5, 0.5, 0.5]))
         ),
         nn_params=NNParams(
             (np.array([0.0, 0.0]),),
