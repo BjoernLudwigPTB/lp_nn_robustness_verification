@@ -12,6 +12,7 @@ __all__ = [
     "RealVector",
     "RealScalarFunction",
     "UncertainArray",
+    "ValidCombinationForZeMA",
     "VectorOfRealMatrices",
     "VectorOfRealVectors",
 ]
@@ -112,3 +113,15 @@ class NNParams:
         return cast(
             Iterator[tuple[RealVector, RealMatrix]], zip(self.biases, self.weights)
         )
+
+
+class ValidCombinationForZeMA(NamedTuple):
+    """A key tuple to mark collections of NumPy seeds known to produce feasible sets"""
+
+    size_scaler: int
+    """the size_scaler for extracting the ZeMA samples"""
+    depth: RealMatrix | RealVector
+    """the network depth used to create layer sizes
+
+    the layer sizes are created using :func:`.generate_nn_params.construct_partition`
+    """
