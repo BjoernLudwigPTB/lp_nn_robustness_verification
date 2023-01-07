@@ -25,3 +25,4 @@ junit.xml
 ### Experiment artifacts ###
 ############################
 **/datasets
+**/*.ipynb
