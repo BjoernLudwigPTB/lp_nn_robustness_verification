@@ -33,7 +33,7 @@ file = "LICENSE"
 
 [project.optional-dependencies]
 dev = [
-    "black",
+    "black[jupyter]",
     "flake8",
     "Flake8-pyproject",
     "hypothesis[numpy]",
@@ -47,6 +47,13 @@ docs = [
     "myst-parser",
     "sphinx",
     "sphinx-rtd-theme",
+]
+examples = [
+    "ipywidgets",
+    "notebook",
+    "pandas",
+    "plotly",
+    "tqdm",
 ]
 release = [
     "python-semantic-release",
