@@ -21,6 +21,14 @@ def test_default_init_uncertain_inputs_has_values(
     assert hasattr(uncertain_inputs, "uncertain_values")
 
 
+def test_default_uncertain_inputs_has_values() -> None:
+    assert hasattr(UncertainInputs, "values")
+
+
+def test_default_uncertain_inputs_has_uncertainties() -> None:
+    assert hasattr(UncertainInputs, "uncertainties")
+
+
 def test_default_init_uncertain_inputs_values_are_uncertain_array(
     uncertain_inputs: UncertainInputs,
 ) -> None:
