@@ -31,11 +31,6 @@ class RobustnessVerification:
     def __init__(self, linear_inclusion: LinearInclusion):
         """Crate an instance of the optimization problem"""
         self.linear_inclusion = linear_inclusion
-        self.label = compute_values_label(
-            linear_inclusion.uncertain_inputs,
-            linear_inclusion.activation,
-            linear_inclusion.nn_params,
-        )
         self.x_is = {}
         self.z_is = {}
         self.r_is = {}
@@ -114,13 +109,18 @@ class RobustnessVerification:
                 )
 
     def _add_auxiliary_cons(self) -> None:
+        label = compute_values_label(
+            self.linear_inclusion.uncertain_inputs,
+            self.linear_inclusion.activation,
+            self.linear_inclusion.nn_params,
+        )
         for neuron_idx in range(len(self.linear_inclusion.theta[-1])):
-            if neuron_idx != self.label:
+            if neuron_idx != label:
                 self.model.addCons(
-                    self.x_is[len(self.linear_inclusion.theta) - 1, self.label]
+                    self.x_is[len(self.linear_inclusion.theta) - 1, label]
                     - self.x_is[len(self.linear_inclusion.theta) - 1, neuron_idx]
                     >= self.auxiliary_t,
-                    f"x_{self.label}^(ell) - x_{neuron_idx}^(ell) >= t",
+                    f"x_{label}^(ell) - x_{neuron_idx}^(ell) >= t",
                 )
 
     def _add_objective(self) -> None:
