@@ -9,7 +9,7 @@ from numpy.testing import assert_allclose, assert_equal
 
 from lp_nn_robustness_verification.data_acquisition import generate_nn_params
 from lp_nn_robustness_verification.data_acquisition.generate_nn_params import (
-    construct_partition,
+    construct_out_features_counts,
     generate_bias_vector,
     generate_weight_matrix,
     generate_weights_and_biases,
@@ -52,7 +52,7 @@ def in_out_features_and_uncertain_values(
     draw: DrawFn,
 ) -> SearchStrategy[tuple[int, list[int], UncertainInputs]]:
     in_features = draw(hst.integers(10, 100))
-    out_features = construct_partition(in_features)
+    out_features = construct_out_features_counts(in_features)
     uncertain_values = draw(uncertain_inputs(dimen=in_features))
     return cast(
         SearchStrategy[tuple[int, list[int], UncertainInputs]],
@@ -61,47 +61,131 @@ def in_out_features_and_uncertain_values(
 
 
 def test_construct_partition_exists() -> None:
-    assert hasattr(generate_nn_params, "construct_partition")
+    assert hasattr(generate_nn_params, "construct_out_features_counts")
 
 
 def test_construct_partition_has_docstring() -> None:
-    assert construct_partition.__doc__ is not None
+    assert construct_out_features_counts.__doc__ is not None
 
 
 def test_construct_partition_has_parameter_in_features() -> None:
-    assert "in_features" in signature(construct_partition).parameters
+    assert "in_features" in signature(construct_out_features_counts).parameters
+
+
+def test_construct_partition_has_parameter_out_features() -> None:
+    assert "out_features" in signature(construct_out_features_counts).parameters
+
+
+def test_construct_partition_parameter_out_features_is_of_type_int() -> None:
+    assert (
+        signature(construct_out_features_counts).parameters["out_features"].annotation
+        is int
+    )
+
+
+def test_construct_partition_has_parameter_depth() -> None:
+    assert "depth" in signature(construct_out_features_counts).parameters
+
+
+def test_construct_partition_parameter_depth_is_of_type_int_or_none() -> None:
+    assert (
+        signature(construct_out_features_counts).parameters["depth"].annotation is int
+    )
 
 
 def test_construct_partition_parameter_in_features_is_of_type_int() -> None:
-    assert signature(construct_partition).parameters["in_features"].annotation is int
+    assert (
+        signature(construct_out_features_counts).parameters["in_features"].annotation
+        is int
+    )
 
 
 def test_construct_partition_parameter_states_to_return_int_list() -> None:
-    assert signature(construct_partition).return_annotation == list[int]
+    assert signature(construct_out_features_counts).return_annotation == list[int]
 
 
 @given(hst.integers(min_value=1, max_value=10))
 def test_construct_partition_actually_returns_int_list(in_features: int) -> None:
-    assert isinstance(construct_partition(in_features), list)
+    assert isinstance(construct_out_features_counts(in_features), list)
 
 
 @given(hst.integers(min_value=1, max_value=100))
 def test_construct_partition_returns_non_empty_list(in_features: int) -> None:
-    assert len(construct_partition(in_features))
+    assert len(construct_out_features_counts(in_features))
 
 
 def test_construct_partition_returns_correct_small_example() -> None:
-    assert construct_partition(10) == [10, 7, 5, 3, 2]
+    assert construct_out_features_counts(89, 8, 6) == [76, 63, 50, 36, 22, 8]
 
 
 @given(hst.integers(min_value=1, max_value=100))
 def test_construct_partition_is_descending(in_features: int) -> None:
-    partition = construct_partition(in_features)
+    partition = construct_out_features_counts(in_features)
     assert partition[:] > partition[1:]
 
 
 def test_construct_partition_returns_correct_large_example() -> None:
-    assert construct_partition(100) == [100, 75, 56, 42, 31]
+    assert construct_out_features_counts(99, 3, 59) == [
+        98,
+        97,
+        96,
+        95,
+        94,
+        93,
+        92,
+        91,
+        90,
+        89,
+        88,
+        87,
+        86,
+        85,
+        84,
+        83,
+        82,
+        81,
+        80,
+        79,
+        78,
+        77,
+        75,
+        73,
+        71,
+        69,
+        67,
+        65,
+        63,
+        61,
+        59,
+        57,
+        55,
+        53,
+        51,
+        49,
+        47,
+        45,
+        43,
+        41,
+        39,
+        37,
+        35,
+        33,
+        31,
+        29,
+        27,
+        25,
+        23,
+        21,
+        19,
+        17,
+        15,
+        13,
+        11,
+        9,
+        7,
+        5,
+        3,
+    ]
 
 
 def test_initialize_weight_matrix_exists() -> None:
