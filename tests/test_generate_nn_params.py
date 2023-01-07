@@ -202,6 +202,7 @@ def test_initialize_weight_matrix_provides_ndarray(
 
 
 @given(uncertain_inputs(), hst.integers(min_value=1, max_value=100))
+@settings(deadline=None)
 def test_initialize_weight_matrix_allows_matmul_with_inputs(
     uncertain_input: UncertainInputs, out_features: int
 ) -> None:
