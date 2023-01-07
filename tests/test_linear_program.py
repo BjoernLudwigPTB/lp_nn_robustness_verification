@@ -1,7 +1,9 @@
 import numpy as np
 import pytest
 from _pytest.capture import CaptureFixture
+from numpy.testing import assert_equal
 
+from lp_nn_robustness_verification.data_acquisition.activation_functions import Sigmoid
 from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
@@ -16,6 +18,7 @@ def custom_linear_inclusion() -> LinearInclusion:
         uncertain_inputs=UncertainInputs(
             UncertainArray(np.array([0.0, 0.5, 1.0]), np.array([0.5, 0.5, 0.5]))
         ),
+        activation=Sigmoid,
         nn_params=NNParams(
             (np.array([0.0, 0.0]),),
             (np.array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]),),
@@ -42,3 +45,12 @@ def test_robustness_verification_solve_solves_example(
         "SCIP Status        : problem is solved [optimal solution found]"
         in capfd.readouterr().out
     )
+
+
+def test_robustness_verification_solves_to_known_value(
+    custom_linear_inclusion: LinearInclusion,
+) -> None:
+    optimization = RobustnessVerification(custom_linear_inclusion)
+    optimization.model.hideOutput()
+    optimization.solve()
+    assert_equal(optimization.model.getObjVal(), 0.2310585786300049)
