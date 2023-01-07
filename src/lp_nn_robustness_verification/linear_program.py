@@ -25,6 +25,7 @@ class RobustnessVerification:
     linear_inclusion: LinearInclusion
     x_is: RealVars
     z_is: RealVars
+    r_is: dict[tuple[str, int, int], float]
     model: Model
 
     def __init__(self, linear_inclusion: LinearInclusion):
@@ -37,6 +38,7 @@ class RobustnessVerification:
         )
         self.x_is = {}
         self.z_is = {}
+        self.r_is = {}
         self.model = Model("Robustness Verification")
         self._set_up_model()
 
@@ -90,6 +92,12 @@ class RobustnessVerification:
             zip(self.linear_inclusion.xi_is, self.linear_inclusion.r_is), start=1
         ):
             for neuron_idx, (xi_i_k, r_i_k) in enumerate(zip(xi_i, r_i)):
+                self.r_is["inf", layer_idx, neuron_idx] = self.model.addVar(
+                    name=f"inf r_{neuron_idx}^({layer_idx})", vtype="C"
+                )
+                self.r_is["sup", layer_idx, neuron_idx] = self.model.addVar(
+                    name=f"sup r_{neuron_idx}^({layer_idx})", vtype="C"
+                )
                 linear_approximation = (
                     self.x_is[layer_idx, neuron_idx]
                     - float(self.linear_inclusion.activation.func(xi_i_k))
@@ -97,11 +105,11 @@ class RobustnessVerification:
                     * (self.z_is[layer_idx, neuron_idx] - xi_i_k)
                 )
                 self.model.addCons(
-                    linear_approximation - r_i_k[0].inf >= 0,
+                    linear_approximation - self.r_is["inf", layer_idx, neuron_idx] >= 0,
                     f"x_{neuron_idx}^({layer_idx}) upper half-space",
                 )
                 self.model.addCons(
-                    linear_approximation - r_i_k[0].sup <= 0,
+                    linear_approximation - self.r_is["sup", layer_idx, neuron_idx] <= 0,
                     f"x_{neuron_idx}^({layer_idx}) lower half-space",
                 )
 
@@ -139,4 +147,10 @@ class RobustnessVerification:
                 f"x_{neuron_idx}^({layer_idx}): "
                 f"{self.model.getVal(self.x_is[layer_idx, neuron_idx])}"
             )
+        for (inf_sup_str, layer_idx, neuron_idx) in self.r_is:
+            solution_assignments.append(
+                f"{inf_sup_str} r_{neuron_idx}^({layer_idx}): "
+                f"{self.model.getVal(self.r_is[inf_sup_str, layer_idx, neuron_idx])}"
+            )
+        solution_assignments.append("\n")
         return str(solution_assignments)
