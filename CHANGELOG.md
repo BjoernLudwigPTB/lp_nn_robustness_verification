@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.0 (2023-01-07)
+### Feature
+* **uncertain_inputs:** Introduce direct value und uncertainties access for UncertainInputs ([`98a72aa`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/98a72aaceec8f43ffec1882cb97d3af87660f087))
+* **generate_nn_params:** Introduce seeding into weight and bias generation ([`c4d2fd2`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/c4d2fd246d3c0fd011f083d12cabdb7a6e0f3388))
+* **data_types:** Introduce index type for valid seed collections for ZeMA dataset ([`cf86be9`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/cf86be9be8cd6849241b048e56e5a2432572e5db))
+* **activation_functions:** Introduce quadlu ([`a3c9947`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/a3c99474e7c722ebda2830588d62a5a4dba658f9))
+
+### Documentation
+* **README:** Update Roadmap and Getting started ([`d100a5b`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/d100a5ba4f9056091abf0dd48b1d6d84771eb56d))
+* **linear_inclusion:** Introduce notebook to visualize and experiment with linear inclusion ([`256bb91`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/256bb91b85b3ddb4d82345db1988b1b83ef7d30d))
+* **generate_nn_params:** Introduce module generate_nn_params into docs ([`decca7f`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/decca7ff53f4fe97667a5a5b517e0f3de7176d80))
+
 ## v0.3.0 (2022-12-28)
 ### Feature
 * **optimize:** Introduce creation of deeper network parameters according to pytorch implementation ([`d4cf1f8`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/d4cf1f8038bf5fcd3ce112f57b7faf37d6336cc5))
