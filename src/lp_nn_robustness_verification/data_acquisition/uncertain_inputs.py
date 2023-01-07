@@ -7,7 +7,7 @@ from dataclasses import dataclass
 import numpy as np
 from interval import interval
 
-from ..data_types import Intervals, UncertainArray
+from ..data_types import Intervals, RealMatrix, RealVector, UncertainArray
 
 
 @dataclass
@@ -56,6 +56,16 @@ class UncertainInputs:
             f"but there are {len(self.theta_0)} intervals and each "
             f"{len(self.uncertain_values.values)} values and uncertainties"
         )
+
+    @property
+    def values(self) -> RealVector:
+        """the corresponding values"""
+        return self.uncertain_values.values
+
+    @property
+    def uncertainties(self) -> RealMatrix | RealVector:
+        """... and their associated uncertainties"""
+        return self.uncertain_values.uncertainties
 
     def _build_theta_0(self) -> Intervals:
         """Construct the interval arithmetically enabled datastructure"""
