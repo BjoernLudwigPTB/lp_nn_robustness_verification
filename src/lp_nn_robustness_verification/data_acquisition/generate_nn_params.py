@@ -7,12 +7,20 @@ from numpy._typing import NDArray
 from lp_nn_robustness_verification.data_types import NNParams
 
 
-def construct_partition(in_features: int) -> list[int]:
-    """Construct partition of each 0.75 times smaller sections"""
-    # TODO replace by pytorch_gum_uncertainty_propagation.examples.propagate's function
-    partition = {in_features}
-    while in_features > 2 and len(partition) < 5:
-        partition.add(in_features := 3 * in_features // 4)
+def construct_out_features_counts(
+    in_features: int, out_features: int = 2, depth: int = 1
+) -> list[int]:
+    """Construct network architecture with desired depth for parameter generation"""
+    if depth == 1:
+        return [out_features]
+    assert in_features > out_features
+    assert (in_features - out_features) / depth >= 1.0
+    partition = {out_features}
+    while len(partition) < depth:
+        step = (in_features - out_features) / (depth - len(partition) + 1)
+        partition.add(in_features := math.ceil(in_features - step))
+    assert len(partition) == depth
+    assert min(partition) == out_features
     return list(sorted(partition, reverse=True))
 
 
