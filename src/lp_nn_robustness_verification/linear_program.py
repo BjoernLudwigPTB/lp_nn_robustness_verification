@@ -25,7 +25,8 @@ class RobustnessVerification:
     linear_inclusion: LinearInclusion
     x_is: RealVars
     z_is: RealVars
-    r_is: dict[tuple[str, int, int], float]
+    inf_r_is: RealVars
+    sup_r_is: RealVars
     model: Model
 
     def __init__(self, linear_inclusion: LinearInclusion):
@@ -33,7 +34,8 @@ class RobustnessVerification:
         self.linear_inclusion = linear_inclusion
         self.x_is = {}
         self.z_is = {}
-        self.r_is = {}
+        self.inf_r_is = {}
+        self.sup_r_is = {}
         self.model = Model("Robustness Verification")
         self._set_up_model()
 
@@ -83,14 +85,12 @@ class RobustnessVerification:
                 )
 
     def _add_linear_cons(self) -> None:
-        for layer_idx, (xi_i, r_i) in enumerate(
-            zip(self.linear_inclusion.xi_is, self.linear_inclusion.r_is), start=1
-        ):
-            for neuron_idx, (xi_i_k, r_i_k) in enumerate(zip(xi_i, r_i)):
-                self.r_is["inf", layer_idx, neuron_idx] = self.model.addVar(
+        for layer_idx, xi_i in enumerate(self.linear_inclusion.xi_is, start=1):
+            for neuron_idx, xi_i_k in enumerate(xi_i):
+                self.inf_r_is[layer_idx, neuron_idx] = self.model.addVar(
                     name=f"inf r_{neuron_idx}^({layer_idx})", vtype="C"
                 )
-                self.r_is["sup", layer_idx, neuron_idx] = self.model.addVar(
+                self.sup_r_is[layer_idx, neuron_idx] = self.model.addVar(
                     name=f"sup r_{neuron_idx}^({layer_idx})", vtype="C"
                 )
                 linear_approximation = (
@@ -100,11 +100,11 @@ class RobustnessVerification:
                     * (self.z_is[layer_idx, neuron_idx] - xi_i_k)
                 )
                 self.model.addCons(
-                    linear_approximation - self.r_is["inf", layer_idx, neuron_idx] >= 0,
+                    linear_approximation - self.inf_r_is[layer_idx, neuron_idx] >= 0,
                     f"x_{neuron_idx}^({layer_idx}) upper half-space",
                 )
                 self.model.addCons(
-                    linear_approximation - self.r_is["sup", layer_idx, neuron_idx] <= 0,
+                    linear_approximation - self.sup_r_is[layer_idx, neuron_idx] <= 0,
                     f"x_{neuron_idx}^({layer_idx}) lower half-space",
                 )
 
@@ -142,15 +142,14 @@ class RobustnessVerification:
     def visualize_solution(self) -> str:
         """Rudimentary visualize the optimization result on the console"""
         solution_assignments = []
-        for (layer_idx, neuron_idx) in self.x_is:
+        for x_i in self.x_is.values():
+            solution_assignments.append(f"{x_i.name}: " f"{self.model.getVal(x_i)}")
+        for inf_r_i, sup_r_i in zip(self.inf_r_is.values(), self.sup_r_is.values()):
             solution_assignments.append(
-                f"x_{neuron_idx}^({layer_idx}): "
-                f"{self.model.getVal(self.x_is[layer_idx, neuron_idx])}"
+                f"{inf_r_i.name}: " f"{self.model.getVal(inf_r_i)}"
             )
-        for (inf_sup_str, layer_idx, neuron_idx) in self.r_is:
             solution_assignments.append(
-                f"{inf_sup_str} r_{neuron_idx}^({layer_idx}): "
-                f"{self.model.getVal(self.r_is[inf_sup_str, layer_idx, neuron_idx])}"
+                f"{sup_r_i.name}: " f"{self.model.getVal(sup_r_i)}"
             )
         solution_assignments.append("\n")
         return str(solution_assignments)
