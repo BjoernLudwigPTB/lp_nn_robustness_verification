@@ -13,6 +13,10 @@ subject to constant change.
 ## Getting started
 
 The [INSTALL guide](INSTALL.md) assists in installing the required packages.
+After that you might want to have a look at our [optimization script
+](./src/lp_nn_robustness_verification/optimize.py) or the provided [notebook
+](./src/lp_nn_robustness_verification/examples/linear_inclusion.ipynb) to get a 
+feeling for how to use the software.
 
 ## Documentation
 
@@ -35,4 +39,4 @@ _docs/\_build/index.html_ in any browser.
 
 ## Roadmap
 
-- implement first draft of optimization with dummy data to validate results
+- check what improvements are made by switching to optimizable variables for the $r_i$s
