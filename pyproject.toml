@@ -100,3 +100,10 @@ max-line-length = 88
 # system, and so shouldn't trigger E1101 when accessed. Python regular
 # expressions are accepted.
 #generated-members = "<package-name>.*"
+
+[tool.pylint.main]
+# A comma-separated list of package or module names from where C extensions may
+# be loaded. Extensions are loading into the active Python interpreter and may
+# run arbitrary code.
+extension-pkg-allow-list = ["pyscipopt"]
+
