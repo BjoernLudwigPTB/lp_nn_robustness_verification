@@ -22,6 +22,7 @@ from typing import Callable, cast, Iterator, NamedTuple, TypeAlias
 import numpy as np
 from interval import interval
 from numpy._typing import NDArray
+from pyscipopt.scip import Variable  # type: ignore[import]
 
 RealMatrix: TypeAlias = NDArray[np.float64]
 """A real matrix represented by a :class:`np.ndarray <numpy.ndarray>`"""
@@ -43,7 +44,7 @@ LayerIdx: TypeAlias = int
 """Index of a layer of a neural network"""
 NeuronIdx: TypeAlias = int
 """Index of a neuron in a layer of a neural network"""
-RealVars: TypeAlias = dict[tuple[LayerIdx, NeuronIdx], float]
+RealVars: TypeAlias = dict[tuple[LayerIdx, NeuronIdx], Variable]
 """The real variables in the linear optimization problem"""
 
 
