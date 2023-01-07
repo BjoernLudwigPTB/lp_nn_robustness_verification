@@ -123,5 +123,6 @@ class ValidCombinationForZeMA(NamedTuple):
     depth: RealMatrix | RealVector
     """the network depth used to create layer sizes
 
-    the layer sizes are created using :func:`.generate_nn_params.construct_partition`
+    the layer sizes are created using
+    :func:`.generate_nn_params.construct_out_features_counts`
     """
