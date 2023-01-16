@@ -26,6 +26,7 @@ dependencies = [
     "numpy",
     "pyinterval",
     "pyscipopt",
+    "zema_emc_annotated",
 ]
 [license]
 text = "MIT"
