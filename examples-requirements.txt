@@ -6,6 +6,8 @@
 #
 anyio==3.6.2
     # via jupyter-server
+appdirs==1.4.4
+    # via pooch
 argon2-cffi==21.3.0
     # via
     #   jupyter-server
@@ -25,8 +27,12 @@ beautifulsoup4==4.11.1
     # via nbconvert
 bleach==5.0.1
     # via nbconvert
+certifi==2022.12.7
+    # via requests
 cffi==1.15.1
     # via argon2-cffi-bindings
+charset-normalizer==3.0.1
+    # via requests
 comm==0.1.2
     # via ipykernel
 crlibm==1.0.3
@@ -45,11 +51,14 @@ fastjsonschema==2.16.2
     # via nbformat
 fqdn==1.5.1
     # via jsonschema
+h5py==3.7.0
+    # via zema-emc-annotated
 idna==3.4
     # via
     #   anyio
     #   jsonschema
-ipykernel==6.19.4
+    #   requests
+ipykernel==6.20.2
     # via
     #   ipywidgets
     #   nbclassic
@@ -80,14 +89,14 @@ jsonschema[format-nongpl]==4.17.3
     # via
     #   jupyter-events
     #   nbformat
-jupyter-client==7.4.8
+jupyter-client==7.4.9
     # via
     #   ipykernel
     #   jupyter-server
     #   nbclassic
     #   nbclient
     #   notebook
-jupyter-core==5.1.2
+jupyter-core==5.1.3
     # via
     #   jupyter-client
     #   jupyter-server
@@ -96,13 +105,13 @@ jupyter-core==5.1.2
     #   nbconvert
     #   nbformat
     #   notebook
-jupyter-events==0.5.0
+jupyter-events==0.6.3
     # via jupyter-server
-jupyter-server==2.0.6
+jupyter-server==2.1.0
     # via
     #   nbclassic
     #   notebook-shim
-jupyter-server-terminals==0.4.3
+jupyter-server-terminals==0.4.4
     # via jupyter-server
 jupyterlab-pygments==0.2.2
     # via nbconvert
@@ -122,12 +131,12 @@ nbclassic==0.4.8
     # via notebook
 nbclient==0.7.2
     # via nbconvert
-nbconvert==7.2.7
+nbconvert==7.2.8
     # via
     #   jupyter-server
     #   nbclassic
     #   notebook
-nbformat==5.7.1
+nbformat==5.7.3
     # via
     #   jupyter-server
     #   nbclassic
@@ -146,13 +155,16 @@ notebook-shim==0.2.2
     # via nbclassic
 numpy==1.24.1
     # via
+    #   h5py
     #   lp-nn-robustness-verification (setup.py)
     #   pandas
-packaging==22.0
+    #   zema-emc-annotated
+packaging==23.0
     # via
     #   ipykernel
     #   jupyter-server
     #   nbconvert
+    #   pooch
 pandas==1.5.2
     # via lp-nn-robustness-verification (setup.py)
 pandocfilters==1.5.0
@@ -165,8 +177,10 @@ pickleshare==0.7.5
     # via ipython
 platformdirs==2.6.2
     # via jupyter-core
-plotly==5.11.0
+plotly==5.12.0
     # via lp-nn-robustness-verification (setup.py)
+pooch==1.6.0
+    # via zema-emc-annotated
 prometheus-client==0.15.0
     # via
     #   jupyter-server
@@ -201,21 +215,27 @@ python-dateutil==2.8.2
     #   pandas
 python-json-logger==2.0.4
     # via jupyter-events
-pytz==2022.7
+pytz==2022.7.1
     # via pandas
 pyyaml==6.0
     # via jupyter-events
-pyzmq==24.0.1
+pyzmq==25.0.0
     # via
     #   ipykernel
     #   jupyter-client
     #   jupyter-server
     #   nbclassic
     #   notebook
+requests==2.28.2
+    # via pooch
 rfc3339-validator==0.1.4
-    # via jsonschema
+    # via
+    #   jsonschema
+    #   jupyter-events
 rfc3986-validator==0.1.1
-    # via jsonschema
+    # via
+    #   jsonschema
+    #   jupyter-events
 send2trash==1.8.0
     # via
     #   jupyter-server
@@ -253,8 +273,10 @@ tornado==6.2
     #   notebook
     #   terminado
 tqdm==4.64.1
-    # via lp-nn-robustness-verification (setup.py)
-traitlets==5.8.0
+    # via
+    #   lp-nn-robustness-verification (setup.py)
+    #   zema-emc-annotated
+traitlets==5.8.1
     # via
     #   comm
     #   ipykernel
@@ -272,7 +294,9 @@ traitlets==5.8.0
     #   notebook
 uri-template==1.2.0
     # via jsonschema
-wcwidth==0.2.5
+urllib3==1.26.14
+    # via requests
+wcwidth==0.2.6
     # via prompt-toolkit
 webcolors==1.12
     # via jsonschema
@@ -286,3 +310,5 @@ wheel==0.38.4
     # via pyscipopt
 widgetsnbextension==4.0.5
     # via ipywidgets
+zema-emc-annotated==0.4.0
+    # via lp-nn-robustness-verification (setup.py)

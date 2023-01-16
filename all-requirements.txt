@@ -4,10 +4,12 @@
 #
 #    pip-compile --extra=dev --extra=docs --extra=examples --extra=release --output-file=all-requirements.txt --resolver=backtracking
 #
-alabaster==0.7.12
+alabaster==0.7.13
     # via sphinx
 anyio==3.6.2
     # via jupyter-server
+appdirs==1.4.4
+    # via pooch
 argon2-cffi==21.3.0
     # via
     #   jupyter-server
@@ -17,7 +19,7 @@ argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 arrow==1.2.3
     # via isoduration
-astroid==2.12.14
+astroid==2.13.2
     # via pylint
 asttokens==2.2.1
     # via stack-data
@@ -44,7 +46,7 @@ cffi==1.15.1
     # via
     #   argon2-cffi-bindings
     #   cryptography
-charset-normalizer==2.1.1
+charset-normalizer==3.0.1
     # via requests
 click==8.1.3
     # via
@@ -57,7 +59,7 @@ colorama==0.4.6
     # via twine
 comm==0.1.2
     # via ipykernel
-coverage[toml]==7.0.3
+coverage[toml]==7.0.5
     # via pytest-cov
 crlibm==1.0.3
     # via pyinterval
@@ -101,7 +103,9 @@ gitdb==4.0.10
     # via gitpython
 gitpython==3.1.30
     # via python-semantic-release
-hypothesis[numpy]==6.61.1
+h5py==3.7.0
+    # via zema-emc-annotated
+hypothesis[numpy]==6.62.1
     # via lp-nn-robustness-verification (setup.py)
 idna==3.4
     # via
@@ -114,11 +118,11 @@ importlib-metadata==6.0.0
     # via
     #   keyring
     #   twine
-iniconfig==1.1.1
+iniconfig==2.0.0
     # via pytest
 invoke==1.7.3
     # via python-semantic-release
-ipykernel==6.19.4
+ipykernel==6.20.2
     # via
     #   ipywidgets
     #   nbclassic
@@ -160,14 +164,14 @@ jsonschema[format-nongpl]==4.17.3
     # via
     #   jupyter-events
     #   nbformat
-jupyter-client==7.4.8
+jupyter-client==7.4.9
     # via
     #   ipykernel
     #   jupyter-server
     #   nbclassic
     #   nbclient
     #   notebook
-jupyter-core==5.1.2
+jupyter-core==5.1.3
     # via
     #   jupyter-client
     #   jupyter-server
@@ -176,13 +180,13 @@ jupyter-core==5.1.2
     #   nbconvert
     #   nbformat
     #   notebook
-jupyter-events==0.5.0
+jupyter-events==0.6.3
     # via jupyter-server
-jupyter-server==2.0.6
+jupyter-server==2.1.0
     # via
     #   nbclassic
     #   notebook-shim
-jupyter-server-terminals==0.4.3
+jupyter-server-terminals==0.4.4
     # via jupyter-server
 jupyterlab-pygments==0.2.2
     # via nbconvert
@@ -228,12 +232,12 @@ nbclassic==0.4.8
     # via notebook
 nbclient==0.7.2
     # via nbconvert
-nbconvert==7.2.7
+nbconvert==7.2.8
     # via
     #   jupyter-server
     #   nbclassic
     #   notebook
-nbformat==5.7.1
+nbformat==5.7.3
     # via
     #   jupyter-server
     #   nbclassic
@@ -252,14 +256,17 @@ notebook-shim==0.2.2
     # via nbclassic
 numpy==1.24.1
     # via
+    #   h5py
     #   hypothesis
     #   lp-nn-robustness-verification (setup.py)
     #   pandas
-packaging==22.0
+    #   zema-emc-annotated
+packaging==23.0
     # via
     #   ipykernel
     #   jupyter-server
     #   nbconvert
+    #   pooch
     #   pytest
     #   python-semantic-release
     #   sphinx
@@ -275,17 +282,19 @@ pexpect==4.8.0
     # via ipython
 pickleshare==0.7.5
     # via ipython
-pkginfo==1.9.5
+pkginfo==1.9.6
     # via twine
 platformdirs==2.6.2
     # via
     #   black
     #   jupyter-core
     #   pylint
-plotly==5.11.0
+plotly==5.12.0
     # via lp-nn-robustness-verification (setup.py)
 pluggy==1.0.0
     # via pytest
+pooch==1.6.0
+    # via zema-emc-annotated
 prometheus-client==0.15.0
     # via
     #   jupyter-server
@@ -315,13 +324,13 @@ pygments==2.14.0
     #   sphinx
 pyinterval==1.2.0
     # via lp-nn-robustness-verification (setup.py)
-pylint==2.15.9
+pylint==2.15.10
     # via lp-nn-robustness-verification (setup.py)
 pyrsistent==0.19.3
     # via jsonschema
 pyscipopt==4.2.0
     # via lp-nn-robustness-verification (setup.py)
-pytest==7.2.0
+pytest==7.2.1
     # via
     #   lp-nn-robustness-verification (setup.py)
     #   pytest-cov
@@ -339,9 +348,9 @@ python-gitlab==3.12.0
     # via python-semantic-release
 python-json-logger==2.0.4
     # via jupyter-events
-python-semantic-release==7.32.2
+python-semantic-release==7.33.0
     # via lp-nn-robustness-verification (setup.py)
-pytz==2022.7
+pytz==2022.7.1
     # via
     #   babel
     #   pandas
@@ -349,7 +358,7 @@ pyyaml==6.0
     # via
     #   jupyter-events
     #   myst-parser
-pyzmq==24.0.1
+pyzmq==25.0.0
     # via
     #   ipykernel
     #   jupyter-client
@@ -358,8 +367,9 @@ pyzmq==24.0.1
     #   notebook
 readme-renderer==37.3
     # via twine
-requests==2.28.1
+requests==2.28.2
     # via
+    #   pooch
     #   python-gitlab
     #   python-semantic-release
     #   requests-toolbelt
@@ -370,11 +380,15 @@ requests-toolbelt==0.10.1
     #   python-gitlab
     #   twine
 rfc3339-validator==0.1.4
-    # via jsonschema
+    # via
+    #   jsonschema
+    #   jupyter-events
 rfc3986==2.0.0
     # via twine
 rfc3986-validator==0.1.1
-    # via jsonschema
+    # via
+    #   jsonschema
+    #   jupyter-events
 secretstorage==3.3.3
     # via keyring
 semver==2.13.0
@@ -408,7 +422,7 @@ sphinx==5.3.0
     #   sphinx-rtd-theme
 sphinx-rtd-theme==1.1.1
     # via lp-nn-robustness-verification (setup.py)
-sphinxcontrib-applehelp==1.0.2
+sphinxcontrib-applehelp==1.0.3
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
     # via sphinx
@@ -458,7 +472,8 @@ tqdm==4.64.1
     # via
     #   lp-nn-robustness-verification (setup.py)
     #   twine
-traitlets==5.8.0
+    #   zema-emc-annotated
+traitlets==5.8.1
     # via
     #   comm
     #   ipykernel
@@ -478,15 +493,16 @@ twine==3.8.0
     # via python-semantic-release
 typing-extensions==4.4.0
     # via
+    #   astroid
     #   mypy
     #   myst-parser
 uri-template==1.2.0
     # via jsonschema
-urllib3==1.26.13
+urllib3==1.26.14
     # via
     #   requests
     #   twine
-wcwidth==0.2.5
+wcwidth==0.2.6
     # via prompt-toolkit
 webcolors==1.12
     # via jsonschema
@@ -504,5 +520,7 @@ widgetsnbextension==4.0.5
     # via ipywidgets
 wrapt==1.14.1
     # via astroid
+zema-emc-annotated==0.4.0
+    # via lp-nn-robustness-verification (setup.py)
 zipp==3.11.0
     # via importlib-metadata
