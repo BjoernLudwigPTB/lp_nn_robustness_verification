@@ -29,12 +29,12 @@ def find_seeds_and_samples(task_id: int) -> None:
     """Iterate over all possible parameter choices to find valid examples"""
     seeds = trange(90000 * task_id // 144, 90000 * (task_id + 1) // 144)
     valid_seeds: dict[ValidCombinationForZeMA, IndexAndSeed] = {}
-    size_scalers: list[int] = [10, 100, 1000, 2000]
-    depths: list[int] = [3, 5, 8]
+    size_scalers: list[int] = [100]
+    depths: list[int] = [3]
     for size_scaler in size_scalers:
         zema_data = ZeMASamples(4766, size_scaler, True)
         for depth in depths:
-            for idx_start in range(4766):
+            for idx_start in range(1):
                 uncertain_inputs = UncertainInputs(
                     UncertainArray(
                         zema_data.values[idx_start], zema_data.uncertainties[idx_start]
@@ -44,6 +44,7 @@ def find_seeds_and_samples(task_id: int) -> None:
                     valid_seeds.get(ValidCombinationForZeMA(size_scaler, depth))
                     is not None
                 ):
+                    print(f"valid seeds: {valid_seeds}")
                     break
                 for seed in seeds:
                     linear_inclusion = LinearInclusion(
@@ -68,8 +69,6 @@ def find_seeds_and_samples(task_id: int) -> None:
                             seed,
                         )
                         break
-    sleep(0.5)
-    print(f"valid seeds: {valid_seeds}")
 
 
 if __name__ == "__main__":
