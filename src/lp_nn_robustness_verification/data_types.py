@@ -126,3 +126,5 @@ class ValidCombinationForZeMA(NamedTuple):
     the layer sizes are created using
     :func:`.generate_nn_params.construct_out_features_counts`
     """
+    sample: int
+    """the index of the sample to be used between 0 and 4765"""
