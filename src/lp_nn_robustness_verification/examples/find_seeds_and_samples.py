@@ -1,3 +1,6 @@
+"""An implementation of a parallelized search for valid samples and seeds"""
+
+import sys
 from time import sleep
 
 from tqdm import trange
