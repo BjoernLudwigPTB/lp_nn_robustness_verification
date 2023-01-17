@@ -17,6 +17,7 @@ from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
 from lp_nn_robustness_verification.data_types import (
+    IndexAndSeed,
     UncertainArray,
     ValidCombinationForZeMA,
 )
@@ -24,25 +25,27 @@ from lp_nn_robustness_verification.linear_program import RobustnessVerification
 from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
 
-def find_seeds_and_samples() -> None:
+def find_seeds_and_samples(task_id: int) -> None:
     """Iterate over all possible parameter choices to find valid examples"""
-    valid_seeds: dict[ValidCombinationForZeMA, int] = {}
-    size_scalers: list[int] = [2000]
-    depths: list[int] = [8]
+    seeds = trange(90000 * task_id // 144, 90000 * (task_id + 1) // 144)
+    valid_seeds: dict[ValidCombinationForZeMA, IndexAndSeed] = {}
+    size_scalers: list[int] = [10, 100, 1000, 2000]
+    depths: list[int] = [3, 5, 8]
     for size_scaler in size_scalers:
         zema_data = ZeMASamples(4766, size_scaler, True)
         for depth in depths:
-            for idx_start in range(1):
+            for idx_start in range(4766):
                 uncertain_inputs = UncertainInputs(
                     UncertainArray(
                         zema_data.values[idx_start], zema_data.uncertainties[idx_start]
                     )
                 )
-                print(
-                    f"Trying to find valid seed for "
-                    f"{ValidCombinationForZeMA(size_scaler, depth, idx_start)}"
-                )
-                for seed in trange(1):
+                if (
+                    valid_seeds.get(ValidCombinationForZeMA(size_scaler, depth))
+                    is not None
+                ):
+                    break
+                for seed in seeds:
                     linear_inclusion = LinearInclusion(
                         uncertain_inputs,
                         Sigmoid,
@@ -59,12 +62,15 @@ def find_seeds_and_samples() -> None:
                     optimization.solve()
                     if optimization.model.getSols():
                         valid_seeds[
-                            ValidCombinationForZeMA(size_scaler, depth, idx_start)
-                        ] = seed
+                            ValidCombinationForZeMA(size_scaler, depth)
+                        ] = IndexAndSeed(
+                            idx_start,
+                            seed,
+                        )
                         break
     sleep(0.5)
     print(f"valid seeds: {valid_seeds}")
 
 
 if __name__ == "__main__":
-    find_seeds_and_samples()
+    find_seeds_and_samples(int(sys.argv[1]))
