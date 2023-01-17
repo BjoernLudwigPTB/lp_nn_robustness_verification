@@ -120,7 +120,7 @@ class ValidCombinationForZeMA(NamedTuple):
 
     size_scaler: int
     """the size_scaler for extracting the ZeMA samples"""
-    depth: RealMatrix | RealVector
+    depth: int
     """the network depth used to create layer sizes
 
     the layer sizes are created using
