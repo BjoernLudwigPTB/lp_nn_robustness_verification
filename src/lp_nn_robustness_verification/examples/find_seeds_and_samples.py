@@ -1,7 +1,6 @@
 """An implementation of a parallelized search for valid samples and seeds"""
 
 import sys
-from time import sleep
 
 from tqdm import trange
 from zema_emc_annotated.dataset import ZeMASamples  # type: ignore[import]
@@ -27,14 +26,18 @@ from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
 def find_seeds_and_samples(task_id: int) -> None:
     """Iterate over all possible parameter choices to find valid examples"""
-    seeds = trange(90000 * task_id // 144, 90000 * (task_id + 1) // 144)
+    seeds = trange(90000 * task_id // 300, 90000 * (task_id + 1) // 300)
+    print(f"Current jobs seeds are {seeds}.")
     valid_seeds: dict[ValidCombinationForZeMA, IndexAndSeed] = {}
-    size_scalers: list[int] = [100]
-    depths: list[int] = [3]
+    size_scalers: list[int] = [10]
+    depths: list[int] = [3, 5, 8]
     for size_scaler in size_scalers:
         zema_data = ZeMASamples(4766, size_scaler, True)
         for depth in depths:
-            for idx_start in range(1):
+            print(
+                f"Trying to find seed for {ValidCombinationForZeMA(size_scaler, depth)}"
+            )
+            for idx_start in range(4766):
                 uncertain_inputs = UncertainInputs(
                     UncertainArray(
                         zema_data.values[idx_start], zema_data.uncertainties[idx_start]
