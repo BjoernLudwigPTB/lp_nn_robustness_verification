@@ -491,6 +491,8 @@ traitlets==5.8.1
     #   notebook
 twine==3.8.0
     # via python-semantic-release
+types-tqdm==4.64.7.10
+    # via lp-nn-robustness-verification (setup.py)
 typing-extensions==4.4.0
     # via
     #   astroid

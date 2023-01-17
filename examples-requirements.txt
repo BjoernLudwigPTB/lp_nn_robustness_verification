@@ -292,6 +292,8 @@ traitlets==5.8.1
     #   nbconvert
     #   nbformat
     #   notebook
+types-tqdm==4.64.7.10
+    # via lp-nn-robustness-verification (setup.py)
 uri-template==1.2.0
     # via jsonschema
 urllib3==1.26.14
