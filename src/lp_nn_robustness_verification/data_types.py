@@ -2,6 +2,7 @@
 
 __all__ = [
     "ActivationFunc",
+    "IndexAndSeed",
     "Intervals",
     "IntervalCollection",
     "LayerIdx",
@@ -126,3 +127,12 @@ class ValidCombinationForZeMA(NamedTuple):
     the layer sizes are created using
     :func:`.generate_nn_params.construct_out_features_counts`
     """
+
+
+class IndexAndSeed(NamedTuple):
+    """A value tuple of a sample index and NumPy seed known to produce a feasible set"""
+
+    index: int
+    """the index of the sample in the ZeMA dataset"""
+    seed: int
+    """the NumPy seed to be used when creating the weight and bias matrices"""
