@@ -55,6 +55,7 @@ examples = [
     "pandas",
     "plotly",
     "tqdm",
+    "types-tqdm",
 ]
 release = [
     "python-semantic-release",
