@@ -53,12 +53,13 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
                     is not None
                 ):
                     print(f"valid seeds: {valid_seeds}")
-                    with open(f"{size_scaler}_{depth}.txt", "w") as valid_seeds_file:
+                    with open(
+                        f"{size_scaler}_{depth}.txt", "w", encoding="utf-8"
+                    ) as valid_seeds_file:
                         fcntl.flock(valid_seeds_file, fcntl.LOCK_EX)
-                        valid_seeds_file.write(
-                            f"{ValidCombinationForZeMA(size_scaler, depth)}\n"
-                        )
+                        valid_seeds_file.write(f"{valid_seeds}\n")
                         fcntl.flock(valid_seeds_file, fcntl.LOCK_UN)
+                    valid_seeds = {}
                     break
                 for seed in range(
                     100000 // (28 * 7) * (task_id * 28 + proc_id),
