@@ -31,7 +31,7 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
     Parameters
     ----------
     task_id : int
-        expected to lie between 0 and 6 each included
+        expected to lie between 0 and 8 each included
     proc_id : int
         expected to lie between 0 and 27 each included
     """
