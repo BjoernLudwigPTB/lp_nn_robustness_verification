@@ -55,7 +55,9 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
                     print(f"valid seeds: {valid_seeds}")
                     with open(f"{size_scaler}_{depth}.txt", "w") as valid_seeds_file:
                         fcntl.flock(valid_seeds_file, fcntl.LOCK_EX)
-                        valid_seeds_file.write(f"{valid_seeds}\n")
+                        valid_seeds_file.write(
+                            f"{ValidCombinationForZeMA(size_scaler, depth)}\n"
+                        )
                         fcntl.flock(valid_seeds_file, fcntl.LOCK_UN)
                     break
                 for seed in range(
