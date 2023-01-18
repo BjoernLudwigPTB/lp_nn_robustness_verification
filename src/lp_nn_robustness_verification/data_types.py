@@ -2,7 +2,6 @@
 
 __all__ = [
     "ActivationFunc",
-    "IndexAndSeed",
     "Intervals",
     "IntervalCollection",
     "LayerIdx",
@@ -13,7 +12,6 @@ __all__ = [
     "RealVector",
     "RealScalarFunction",
     "UncertainArray",
-    "ValidCombinationForZeMA",
     "VectorOfRealMatrices",
     "VectorOfRealVectors",
 ]
@@ -116,23 +114,10 @@ class NNParams:
         )
 
 
-class ValidCombinationForZeMA(NamedTuple):
-    """A key tuple to mark collections of NumPy seeds known to produce feasible sets"""
+class RI(NamedTuple):
+    """A tuple of a name and a value of a Taylor's Series remainder term"""
 
-    size_scaler: int
-    """the size_scaler for extracting the ZeMA samples"""
-    depth: int
-    """the network depth used to create layer sizes
-
-    the layer sizes are created using
-    :func:`.generate_nn_params.construct_out_features_counts`
-    """
-
-
-class IndexAndSeed(NamedTuple):
-    """A value tuple of a sample index and NumPy seed known to produce a feasible set"""
-
-    index: int
-    """the index of the sample in the ZeMA dataset"""
-    seed: int
-    """the NumPy seed to be used when creating the weight and bias matrices"""
+    name: str
+    """the name of the specific remainder"""
+    value: float
+    """the value of the specific remainder"""
