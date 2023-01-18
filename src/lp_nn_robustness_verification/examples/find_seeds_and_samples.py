@@ -2,7 +2,6 @@
 
 import sys
 
-from tqdm import trange
 from zema_emc_annotated.dataset import ZeMASamples  # type: ignore[import]
 
 from lp_nn_robustness_verification.data_acquisition.activation_functions import (
@@ -24,8 +23,16 @@ from lp_nn_robustness_verification.linear_program import RobustnessVerification
 from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
 
-def find_seeds_and_samples(task_id: int) -> None:
-    """Iterate over all possible parameter choices to find valid examples"""
+def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
+    """Iterate over all possible parameter choices to find valid examples
+
+    Parameters
+    ----------
+    task_id : int
+        expected to lie between 0 and 6 each included
+    proc_id : int
+        expected to lie between 0 and 27 each included
+    """
     valid_seeds: dict[ValidCombinationForZeMA, IndexAndSeed] = {}
     size_scalers: list[int] = [1]
     depths: list[int] = [1, 3, 5, 8]
@@ -45,11 +52,13 @@ def find_seeds_and_samples(task_id: int) -> None:
                     valid_seeds.get(ValidCombinationForZeMA(size_scaler, depth))
                     is not None
                 ):
+                    print(f"valid seeds: {valid_seeds}")
                     with open(f"{task_id}.txt", "w") as valid_seeds_file:
-                        valid_seeds_file.write(str(valid_seeds))
+                        valid_seeds_file.write(f"{valid_seeds}\n")
                     break
-                for seed in trange(
-                    90000 * task_id // 300, 90000 * (task_id + 1) // 300
+                for seed in range(
+                    100000 // (28 * 7) * (task_id * 28 + proc_id),
+                    100000 // (28 * 7) * (task_id * 28 + proc_id + 1),
                 ):
                     linear_inclusion = LinearInclusion(
                         uncertain_inputs,
@@ -76,4 +85,4 @@ def find_seeds_and_samples(task_id: int) -> None:
 
 
 if __name__ == "__main__":
-    find_seeds_and_samples(int(sys.argv[1]))
+    find_seeds_and_samples(int(sys.argv[1]), int(sys.argv[2]))
