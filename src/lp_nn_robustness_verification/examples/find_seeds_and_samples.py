@@ -68,7 +68,9 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
                         generate_weights_and_biases(
                             len(uncertain_inputs.values),
                             construct_out_features_counts(
-                                len(uncertain_inputs.values), depth=depth
+                                len(uncertain_inputs.values),
+                                out_features=size_scaler * 11 - depth,
+                                depth=depth,
                             ),
                             seed,
                         ),
