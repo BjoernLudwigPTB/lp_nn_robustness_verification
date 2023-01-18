@@ -1,6 +1,14 @@
 """The activation functions ready to be used in the optimization problem"""
 
-__all__ = ["sigmoid", "Sigmoid", "sigmoid_prime", "quadlu", "QuadLU", "quadlu_prime"]
+__all__ = [
+    "Identity",
+    "sigmoid",
+    "Sigmoid",
+    "sigmoid_prime",
+    "quadlu",
+    "QuadLU",
+    "quadlu_prime",
+]
 
 import numpy as np
 
@@ -24,6 +32,18 @@ func : :data:`~lp_nn_robustness_verification.type_aliases.RealScalarFunction`
     the real-valued :func:`sigmoid` activation function
 deriv : :data:`~lp_nn_robustness_verification.type_aliases.RealScalarFunction`
     the first derivative :func:`sigmoid_prime` of the real-valued activation function
+"""
+
+
+Identity = ActivationFunc(
+    lambda x: x, lambda x: 1.0 if isinstance(x, float) else np.ones_like(x)
+)
+"""Provides an interface to the identity activation function and its derivative
+
+func : :data:`~lp_nn_robustness_verification.type_aliases.RealScalarFunction`
+    the real-valued identity activation function :math:`y(x) = x`
+deriv : :data:`~lp_nn_robustness_verification.type_aliases.RealScalarFunction`
+    the first derivative of the real-valued identity function :math:`y(x) = 1`
 """
 
 
