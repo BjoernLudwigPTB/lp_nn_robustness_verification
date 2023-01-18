@@ -53,7 +53,7 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
                     is not None
                 ):
                     print(f"valid seeds: {valid_seeds}")
-                    with open(f"{task_id}.txt", "w") as valid_seeds_file:
+                    with open(f"{task_id}_{proc_id}.txt", "w") as valid_seeds_file:
                         valid_seeds_file.write(f"{valid_seeds}\n")
                     break
                 for seed in range(
