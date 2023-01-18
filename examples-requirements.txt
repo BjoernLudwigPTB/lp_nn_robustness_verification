@@ -117,7 +117,7 @@ jupyterlab-pygments==0.2.2
     # via nbconvert
 jupyterlab-widgets==3.0.5
     # via ipywidgets
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via
     #   jinja2
     #   nbconvert
@@ -312,5 +312,7 @@ wheel==0.38.4
     # via pyscipopt
 widgetsnbextension==4.0.5
     # via ipywidgets
+yappi==1.4.0
+    # via lp-nn-robustness-verification (setup.py)
 zema-emc-annotated==0.4.0
     # via lp-nn-robustness-verification (setup.py)

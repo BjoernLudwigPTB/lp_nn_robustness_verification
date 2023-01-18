@@ -200,7 +200,7 @@ markdown-it-py==2.1.0
     # via
     #   mdit-py-plugins
     #   myst-parser
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via
     #   jinja2
     #   nbconvert
@@ -522,6 +522,8 @@ widgetsnbextension==4.0.5
     # via ipywidgets
 wrapt==1.14.1
     # via astroid
+yappi==1.4.0
+    # via lp-nn-robustness-verification (setup.py)
 zema-emc-annotated==0.4.0
     # via lp-nn-robustness-verification (setup.py)
 zipp==3.11.0
