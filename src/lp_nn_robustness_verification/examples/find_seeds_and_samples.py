@@ -81,10 +81,7 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
                     if optimization.model.getSols():
                         valid_seeds[
                             ValidCombinationForZeMA(size_scaler, depth)
-                        ] = IndexAndSeed(
-                            idx_start,
-                            seed,
-                        )
+                        ] = IndexAndSeed(idx_start, seed)
                         break
 
 
