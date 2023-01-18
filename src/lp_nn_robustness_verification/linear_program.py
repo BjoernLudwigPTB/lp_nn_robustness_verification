@@ -95,9 +95,7 @@ class GenericRobustnessVerification:
         """Actually solve the optimization problem"""
         self.model.optimize()
 
-    def visualize_solution(
-        self, inf_r_is: list[RI] | None = None, sup_r_is: list[RI] | None = None
-    ) -> str:
+    def visualize_solution(self, inf_r_is: list[RI], sup_r_is: list[RI]) -> str:
         """Rudimentary visualize the optimization result on the console"""
         solution_assignments = []
         for x_i in self.x_is.values():
@@ -159,11 +157,13 @@ class RobustnessVerification(GenericRobustnessVerification):
     ) -> str:
         """Rudimentary visualize the optimization result on the console"""
         if inf_r_is is None:
-            inf_r_is: list[RI] = []
+            inf_r_is = []
+            assert inf_r_is is not None
             for inf_r_i in self.inf_r_is.values():
                 inf_r_is.append(RI(inf_r_i.name, self.model.getVal(inf_r_i)))
         if sup_r_is is None:
-            sup_r_is: list[RI] = []
+            sup_r_is = []
+            assert sup_r_is is not None
             for sup_r_i in self.sup_r_is.values():
                 sup_r_is.append(RI(sup_r_i.name, self.model.getVal(sup_r_i)))
         return super().visualize_solution(inf_r_is, sup_r_is)
