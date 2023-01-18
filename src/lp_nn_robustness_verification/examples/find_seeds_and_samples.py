@@ -1,5 +1,5 @@
 """An implementation of a parallelized search for valid samples and seeds"""
-
+import fcntl
 import sys
 
 from zema_emc_annotated.dataset import ZeMASamples  # type: ignore[import]
@@ -53,8 +53,10 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
                     is not None
                 ):
                     print(f"valid seeds: {valid_seeds}")
-                    with open(f"{task_id}_{proc_id}.txt", "w") as valid_seeds_file:
+                    with open(f"{size_scaler}_{depth}.txt", "w") as valid_seeds_file:
+                        fcntl.flock(valid_seeds_file, fcntl.LOCK_EX)
                         valid_seeds_file.write(f"{valid_seeds}\n")
+                        fcntl.flock(valid_seeds_file, fcntl.LOCK_UN)
                     break
                 for seed in range(
                     100000 // (28 * 7) * (task_id * 28 + proc_id),
