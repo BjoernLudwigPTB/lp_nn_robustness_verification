@@ -30,12 +30,12 @@ def find_seeds_and_samples(task_id: int) -> None:
     size_scalers: list[int] = [1]
     depths: list[int] = [1, 3, 5, 8]
     for size_scaler in size_scalers:
-        zema_data = ZeMASamples(4766, size_scaler, True)
+        zema_data = ZeMASamples(100, size_scaler, True)
         for depth in depths:
             print(
                 f"Trying to find seed for {ValidCombinationForZeMA(size_scaler, depth)}"
             )
-            for idx_start in range(4766):
+            for idx_start in range(100):
                 uncertain_inputs = UncertainInputs(
                     UncertainArray(
                         zema_data.values[idx_start], zema_data.uncertainties[idx_start]
