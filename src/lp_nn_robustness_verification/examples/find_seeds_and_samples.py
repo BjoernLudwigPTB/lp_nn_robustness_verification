@@ -26,11 +26,9 @@ from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
 def find_seeds_and_samples(task_id: int) -> None:
     """Iterate over all possible parameter choices to find valid examples"""
-    seeds = trange(90000 * task_id // 300, 90000 * (task_id + 1) // 300)
-    print(f"Current jobs seeds are {seeds}.")
     valid_seeds: dict[ValidCombinationForZeMA, IndexAndSeed] = {}
-    size_scalers: list[int] = [10]
-    depths: list[int] = [3, 5, 8]
+    size_scalers: list[int] = [1]
+    depths: list[int] = [1, 3, 5, 8]
     for size_scaler in size_scalers:
         zema_data = ZeMASamples(4766, size_scaler, True)
         for depth in depths:
@@ -47,9 +45,12 @@ def find_seeds_and_samples(task_id: int) -> None:
                     valid_seeds.get(ValidCombinationForZeMA(size_scaler, depth))
                     is not None
                 ):
-                    print(f"valid seeds: {valid_seeds}")
+                    with open(f"{task_id}.txt", "w") as valid_seeds_file:
+                        valid_seeds_file.write(str(valid_seeds))
                     break
-                for seed in seeds:
+                for seed in trange(
+                    90000 * task_id // 300, 90000 * (task_id + 1) // 300
+                ):
                     linear_inclusion = LinearInclusion(
                         uncertain_inputs,
                         Sigmoid,
