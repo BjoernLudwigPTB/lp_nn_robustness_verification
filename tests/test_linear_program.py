@@ -3,13 +3,14 @@ from typing import Callable
 import numpy as np
 import pytest
 from _pytest.capture import CaptureFixture
-from numpy.ma.testutils import assert_almost_equal, assert_close
+from numpy.ma.testutils import assert_almost_equal
 from numpy.testing import assert_equal
-from zema_emc_annotated.dataset import ZeMASamples
+from zema_emc_annotated.dataset import ZeMASamples  # type: ignore[import]
 
 from lp_nn_robustness_verification.data_acquisition.activation_functions import (
     Identity,
-    QuadLU, Sigmoid,
+    QuadLU,
+    Sigmoid,
 )
 from lp_nn_robustness_verification.data_acquisition.generate_nn_params import (
     construct_out_features_counts,
@@ -21,7 +22,6 @@ from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
 from lp_nn_robustness_verification.data_types import NNParams, UncertainArray
 from lp_nn_robustness_verification.examples.data_types import (
     IndexAndSeed,
-    Instances,
     ScalerAndLayers,
 )
 from lp_nn_robustness_verification.linear_program import (
@@ -46,7 +46,9 @@ def custom_linear_inclusion() -> LinearInclusion:
 
 
 @pytest.fixture(scope="session")
-def compute_linear_inclusion_for_instance():
+def compute_linear_inclusion_for_instance() -> Callable[
+    [int, int, int, int], tuple[UncertainInputs, LinearInclusion]
+]:
     def values_and_linear_inclusion(
         size_scaler: int, depth: int, sample_idx: int, seed: int
     ) -> tuple[UncertainInputs, LinearInclusion]:
@@ -265,7 +267,9 @@ def test_robustness_verification_solves_to_known_value_for_custom_problem() -> N
     )
     optimization = RobustnessVerification(linear_inclusion)
     optimization.solve()
-    assert_almost_equal(optimization.model.getObjVal(), -0.1)
+    assert_almost_equal(  # type: ignore[no-untyped-call]
+        optimization.model.getObjVal(), -0.1
+    )
 
 
 def test_robustness_verification_solves_to_known_negative_value_with_sigmoid() -> None:
@@ -276,7 +280,9 @@ def test_robustness_verification_solves_to_known_negative_value_with_sigmoid() -
     )
     optimization = RobustnessVerification(linear_inclusion)
     optimization.solve()
-    assert_almost_equal(optimization.model.getObjVal(), -0.021786708959446344)
+    assert_almost_equal(  # type: ignore[no-untyped-call]
+        optimization.model.getObjVal(), -0.021786708959446344
+    )
 
 
 def test_robustness_verification_solves_to_known_value_with_sigmoid() -> None:
@@ -287,7 +293,9 @@ def test_robustness_verification_solves_to_known_value_with_sigmoid() -> None:
     )
     optimization = RobustnessVerification(linear_inclusion)
     optimization.solve()
-    assert_almost_equal(optimization.model.getObjVal(), 0.04431817490181711)
+    assert_almost_equal(  # type: ignore[no-untyped-call]
+        optimization.model.getObjVal(), 0.04431817490181711
+    )
 
 
 def test_robustness_verification_solves_to_known_value_with_quadlu() -> None:
@@ -298,7 +306,9 @@ def test_robustness_verification_solves_to_known_value_with_quadlu() -> None:
     )
     optimization = RobustnessVerification(linear_inclusion)
     optimization.solve()
-    assert_almost_equal(optimization.model.getObjVal(), 0.2)
+    assert_almost_equal(  # type: ignore[no-untyped-call]
+        optimization.model.getObjVal(), 0.2
+    )
 
 
 def test_robustness_verification_solves_to_known_negative_value_with_quadlu() -> None:
@@ -309,12 +319,14 @@ def test_robustness_verification_solves_to_known_negative_value_with_quadlu() ->
     )
     optimization = RobustnessVerification(linear_inclusion)
     optimization.solve()
-    assert_almost_equal(optimization.model.getObjVal(), -0.06)
+    assert_almost_equal(  # type: ignore[no-untyped-call]
+        optimization.model.getObjVal(), -0.06
+    )
 
 
 def test_robustness_verification_solve_solves_known_to_work_instances(
     custom_linear_inclusion: LinearInclusion,
-    solvable_instances: Instances,
+    solvable_instances: tuple[tuple[ScalerAndLayers, IndexAndSeed], ...],
     compute_linear_inclusion_for_instance: Callable[
         [int, int, int, int], tuple[UncertainInputs, LinearInclusion]
     ],
@@ -333,7 +345,7 @@ def test_robustness_verification_solve_solves_known_to_work_instances(
 
 def test_robust_lu_solve_solves_known_to_work_instances(
     custom_linear_inclusion: LinearInclusion,
-    solvable_instances: Instances,
+    solvable_instances: tuple[tuple[ScalerAndLayers, IndexAndSeed], ...],
     compute_linear_inclusion_for_instance: Callable[
         [int, int, int, int], tuple[UncertainInputs, LinearInclusion]
     ],
@@ -352,7 +364,7 @@ def test_robust_lu_solve_solves_known_to_work_instances(
 
 def test_robustness_verification_original_differs_from_adapted(
     custom_linear_inclusion: LinearInclusion,
-    solvable_instances: Instances,
+    solvable_instances: tuple[tuple[ScalerAndLayers, IndexAndSeed], ...],
     compute_linear_inclusion_for_instance: Callable[
         [int, int, int, int], tuple[UncertainInputs, LinearInclusion]
     ],
