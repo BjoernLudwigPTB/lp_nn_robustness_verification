@@ -34,7 +34,7 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
         expected to lie between 0 and 27 each included
     """
     valid_seeds: dict[ValidCombinationForZeMA, IndexAndSeed] = {}
-    size_scalers: list[int] = [10, 100, 1000]
+    size_scalers: list[int] = [1, 10, 100, 1000]
     depths: list[int] = [1, 3, 5, 8]
     for size_scaler in size_scalers:
         zema_data = ZeMASamples(100, size_scaler, True)
