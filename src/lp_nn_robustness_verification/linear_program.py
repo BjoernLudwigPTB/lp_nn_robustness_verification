@@ -33,15 +33,12 @@ class GenericRobustnessVerification:
         self.x_is = {}
         self.z_is = {}
         self.model = Model("Robustness Verification (abstract base)")
-        self.model.setMaximize()
         self._set_up_model()
 
     def _set_up_model(self) -> None:
         """Set up all the variables for the SCIP model"""
-        self.auxiliary_t = self.model.addVar(name="t", vtype="C", lb=None)
         self._add_vars_x_i_in_theta_i()
         self._add_vars_z_i()
-        self._add_auxiliary_cons()
         self._add_objective()
 
     def _add_vars_x_i_in_theta_i(self) -> None:
@@ -80,7 +77,7 @@ class GenericRobustnessVerification:
                     f"z_{k_idx}^({i_idx})(x^({i_idx - 1}))",
                 )
 
-    def _add_auxiliary_cons(self) -> None:
+    def _add_objective(self) -> None:
         label = compute_values_label(
             self.linear_inclusion.uncertain_inputs,
             self.linear_inclusion.activation,
@@ -88,15 +85,11 @@ class GenericRobustnessVerification:
         )
         for neuron_idx in range(len(self.linear_inclusion.theta[-1])):
             if neuron_idx != label:
-                self.model.addCons(
+                self.model.setObjective(
                     self.x_is[len(self.linear_inclusion.theta) - 1, label]
-                    - self.x_is[len(self.linear_inclusion.theta) - 1, neuron_idx]
-                    >= self.auxiliary_t,
-                    f"x_{label}^(ell) - x_{neuron_idx}^(ell) >= t",
+                    - self.x_is[len(self.linear_inclusion.theta) - 1, neuron_idx],
+                    "minimize",
                 )
-
-    def _add_objective(self) -> None:
-        self.model.setObjective(self.auxiliary_t, "maximize")
 
     def solve(self) -> None:
         """Actually solve the optimization problem"""
