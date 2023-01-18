@@ -31,7 +31,7 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
     Parameters
     ----------
     task_id : int
-        expected to lie between 0 and 8 each included
+        expected to lie between 0 and 7 each included
     proc_id : int
         expected to lie between 0 and 27 each included
     """
@@ -59,8 +59,8 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
                     valid_seeds = {}
                     break
                 for seed in range(
-                    1000000 // (28 * 7) * (task_id * 28 + proc_id),
-                    1000000 // (28 * 7) * (task_id * 28 + proc_id + 1),
+                    1000000 // (28 * 8) * (task_id * 28 + proc_id),
+                    1000000 // (28 * 8) * (task_id * 28 + proc_id + 1),
                 ):
                     linear_inclusion = LinearInclusion(
                         uncertain_inputs,
