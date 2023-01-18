@@ -34,7 +34,7 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
         expected to lie between 0 and 27 each included
     """
     valid_seeds: dict[ValidCombinationForZeMA, IndexAndSeed] = {}
-    size_scalers: list[int] = [1]
+    size_scalers: list[int] = [10, 100, 1000]
     depths: list[int] = [1, 3, 5, 8]
     for size_scaler in size_scalers:
         zema_data = ZeMASamples(100, size_scaler, True)
@@ -54,16 +54,16 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
                 ):
                     print(f"valid seeds: {valid_seeds}")
                     with open(
-                        f"{size_scaler}_{depth}.txt", "w", encoding="utf-8"
+                        f"{size_scaler}_{depth}.txt", "a", encoding="utf-8"
                     ) as valid_seeds_file:
                         fcntl.flock(valid_seeds_file, fcntl.LOCK_EX)
-                        valid_seeds_file.write(f"{valid_seeds}\n")
+                        valid_seeds_file.write(str(valid_seeds) + "\n")
                         fcntl.flock(valid_seeds_file, fcntl.LOCK_UN)
                     valid_seeds = {}
                     break
                 for seed in range(
-                    100000 // (28 * 7) * (task_id * 28 + proc_id),
-                    100000 // (28 * 7) * (task_id * 28 + proc_id + 1),
+                    1000000 // (28 * 7) * (task_id * 28 + proc_id),
+                    1000000 // (28 * 7) * (task_id * 28 + proc_id + 1),
                 ):
                     linear_inclusion = LinearInclusion(
                         uncertain_inputs,
