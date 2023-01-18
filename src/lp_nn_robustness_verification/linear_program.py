@@ -208,10 +208,10 @@ class RobustLU(GenericRobustnessVerification):
     def visualize_solution(
         self, inf_r_is: list[RI] | None = None, sup_r_is: list[RI] | None = None
     ) -> str:
+        """Rudimentary visualize the optimization result on the console"""
         if inf_r_is is None or sup_r_is is None:
             inf_r_is = []
             sup_r_is = []
-        """Rudimentary visualize the optimization result on the console"""
         for layer_idx, r_i in enumerate(self.linear_inclusion.r_is, start=1):
             for neuron_idx, r_i_k in enumerate(r_i):
                 inf_r_is.append(RI(f"inf r_{neuron_idx}^({layer_idx})", r_i_k[0].inf))
