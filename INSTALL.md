@@ -123,9 +123,7 @@ activating:
 Collecting pip-tools
 [...]
 Successfully installed pip-tools-6.11.0
-(lp_nn_robustness_verification_venv) $ python --version
-Python 3.10.7
-(lp_nn_robustness_verification_venv) $ python -m piptools sync requirements.txt 
+(lp_nn_robustness_verification_venv) $ python -m piptools sync 
 requirements.txt
 Collecting [...]
 [...]
@@ -140,15 +138,15 @@ have provided several requirements files with pinned versions. Instead of
 `requirements.txt` in the above command, you can choose one of the following 
 depending on your task:
 
-- `[all-requirements.txt](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/all-requirements.txt)`:
+- [`all-requirements.txt`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/all-requirements.txt):
   if you want to cover all cases and simply install all optional dependencies in a
   known to work configuration
-- `[examples-requirements.txt](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/examples-requirements.txt)`: 
+- [`examples-requirements.txt`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/examples-requirements.txt): 
   for experimenting with the [provided
   examples](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/tree/main/src/lp_nn_robustness_verification/examples)
-- `[dev-requirements.txt](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/dev-requirements.txt)`:
+- [`dev-requirements.txt`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/dev-requirements.txt):
   for starting to work on the code. Please contact
   [us](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/graphs/contributors),
   if you have any questions.
-- `[docs-requirements.txt](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/docs-requirements.txt)`:
+- [`docs-requirements.txt`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/docs-requirements.txt):
   if you want to build the documentation locally
