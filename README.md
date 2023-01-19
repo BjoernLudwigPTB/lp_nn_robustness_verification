@@ -15,9 +15,10 @@ subject to constant change.
 
 The [INSTALL guide](INSTALL.md) assists in installing the required packages.
 After that you might want to have a look at our
-[examples](./src/lp_nn_robustness_verification/examples) and/or the provided 
-[notebook](./src/lp_nn_robustness_verification/examples/linear_inclusion.ipynb) to get a 
-feeling for how to use the software.
+[examples](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/tree/main/src/lp_nn_robustness_verification/examples)
+and/or the provided 
+[notebook](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/src/lp_nn_robustness_verification/examples/linear_inclusion.ipynb)
+to get a feeling for how to use the software.
 
 ## Documentation
 
