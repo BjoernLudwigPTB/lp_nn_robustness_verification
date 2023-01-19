@@ -26,7 +26,7 @@ from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
 from lp_nn_robustness_verification.data_types import UncertainArray
-from lp_nn_robustness_verification.linear_program import RobustnessVerification
+from lp_nn_robustness_verification.linear_program import RobustVerifier
 from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
 if __name__ == "__main__":
@@ -45,7 +45,7 @@ if __name__ == "__main__":
             activation=Sigmoid,
             nn_params=nn_params,
         )
-        optimization = RobustnessVerification(linear_inclusion)
+        optimization = RobustVerifier(linear_inclusion)
         optimization.solve()
         yappi.stop()
         with open("timings.txt", "a", encoding="utf-8") as timings_file:

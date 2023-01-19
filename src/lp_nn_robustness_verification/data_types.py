@@ -112,12 +112,3 @@ class NNParams:
         return cast(
             Iterator[tuple[RealVector, RealMatrix]], zip(self.biases, self.weights)
         )
-
-
-class RI(NamedTuple):
-    """A tuple of a name and a value of a Taylor's Series remainder term"""
-
-    name: str
-    """the name of the specific remainder"""
-    value: float
-    """the value of the specific remainder"""
