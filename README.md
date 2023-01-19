@@ -41,3 +41,19 @@ _docs/\_build/index.html_ in any browser.
 ## Roadmap
 
 - check what improvements are made by switching to optimizable variables for the $r_i$ s
+- make the documentation available on ReadTheDocs
+
+## Disclaimer
+
+This software is developed under the sole responsibility of [Björn
+Ludwig](https://github.com/BjoernLudwigPTB) (the author in the following). The 
+software is made available "as is" free of cost. The author assumes no 
+responsibility whatsoever for its use by other parties, and makes no guarantees, 
+expressed or implied, about its quality, reliability, safety, suitability or any 
+other characteristic. In no event will the author be liable for any direct, indirect or 
+consequential damage arising in connection with the use of this software.
+
+## License
+
+lp_nn_robustness_verification is distributed under the [MIT
+license](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/LICENSE).
