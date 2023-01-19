@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v0.6.1 (2023-01-19)
+### Fix
+* **linear_program:** Remove any clutter from linear_program after finding same results in all cases ([`e4d1f2f`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/e4d1f2fa6d51e7b07402609693c2f125941d7e11))
+* **INSTALL.md:** Fix a bunch of formatting and information issues ([`8a1522b`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/8a1522b07d61b8b1adb57cdaf656533ce4218d95))
+
+### Documentation
+* **examples:** Introduce all examples code into docs ([`5d4ddd3`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/5d4ddd3c3563438a7938de339a17ef181d11be5a))
+
+**[See all commits in this version](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/compare/v0.6.0...v0.6.1)**
+
 ## v0.6.0 (2023-01-19)
 ### Feature
 * **CITATION.cff:** Introduce DOI ([`942bea6`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/942bea652e40decc9e915d2deb50d423c6d7ad9e))
