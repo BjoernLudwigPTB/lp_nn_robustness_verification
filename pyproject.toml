@@ -26,7 +26,6 @@ dependencies = [
     "numpy",
     "pyinterval",
     "pyscipopt",
-    "zema_emc_annotated",
 ]
 [license]
 text = "MIT"
@@ -57,6 +56,7 @@ examples = [
     "tqdm",
     "types-tqdm",
     "yappi",
+    "zema_emc_annotated",
 ]
 release = [
     "python-semantic-release",
