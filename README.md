@@ -1,7 +1,8 @@
 # Neural network robustness verification via Linear Programming
 
 [![pipeline status](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/badges/main/pipeline.svg)](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commits/main)
-[![Latest Release](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/badges/release.svg)](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/releases)
+[![Latest Release](https://img.shields.io/github/v/release/BjoernLudwigPTB/lp_nn_robustness_verification?label=Latest%20release)](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/releases/latest)
+[![DOI](https://zenodo.org/badge/587113361.svg)](https://zenodo.org/badge/latestdoi/587113361)
 
 This is the code written in conjunction with the second part of my Master's thesis on 
 GUM-compliant neural network robustness verification. The code was written for 
