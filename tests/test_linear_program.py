@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, NamedTuple
 
 import numpy as np
 import pytest
@@ -20,12 +20,30 @@ from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
 from lp_nn_robustness_verification.data_types import NNParams, UncertainArray
-from lp_nn_robustness_verification.examples.data_types import (
-    IndexAndSeed,
-    ScalerAndLayers,
-)
 from lp_nn_robustness_verification.linear_program import RobustVerifier
 from lp_nn_robustness_verification.pre_processing import LinearInclusion
+
+
+class ScalerAndLayers(NamedTuple):
+    """A key tuple to mark collections of NumPy seeds known to produce feasible sets"""
+
+    size_scaler: int
+    """the size_scaler for extracting the ZeMA samples"""
+    depth: int
+    """the network depth used to create layer sizes
+
+    the layer sizes are created using
+    :func:`.generate_nn_params.construct_out_features_counts`
+    """
+
+
+class IndexAndSeed(NamedTuple):
+    """A value tuple of a sample index and NumPy seed known to produce a feasible set"""
+
+    sample_idx: int
+    """the index of the sample in the ZeMA dataset"""
+    seed: int
+    """the NumPy seed to be used when creating the weight and bias matrices"""
 
 
 @pytest.fixture(scope="session")

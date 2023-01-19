@@ -13,13 +13,7 @@ from lp_nn_robustness_verification.data_acquisition.generate_nn_params import (
 from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
     UncertainInputs,
 )
-from lp_nn_robustness_verification.data_types import (
-    UncertainArray,
-)
-from lp_nn_robustness_verification.examples.data_types import (
-    IndexAndSeed,
-    ScalerAndLayers,
-)
+from lp_nn_robustness_verification.data_types import UncertainArray
 from lp_nn_robustness_verification.linear_program import RobustVerifier
 from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
@@ -46,20 +40,17 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
     else:
         out_features = 10
     zema_data = ZeMASamples(100, size_scaler, True)
-    print(f"Trying to solve for {ScalerAndLayers(size_scaler, depth)}")
+    print(
+        f"Trying to solve for {size_scaler * 11} inputs and {depth} "
+        f"{'layers' if depth > 1 else 'layer'}"
+    )
+    solved = False
     for idx_start in range(100):
         uncertain_inputs = UncertainInputs(
             UncertainArray(
                 zema_data.values[idx_start], zema_data.uncertainties[idx_start]
             )
         )
-        if valid_seeds.get(ScalerAndLayers(size_scaler, depth)) is not None:
-            print(f"valid seeds: {valid_seeds}")
-            with open(
-                f"{size_scaler}_{depth}.txt", "a", encoding="utf-8"
-            ) as valid_seeds_file:
-                valid_seeds_file.write(str(valid_seeds) + "\n")
-                break
         for seed in range(100):
             linear_inclusion = LinearInclusion(
                 uncertain_inputs,
