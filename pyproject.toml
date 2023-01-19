@@ -5,8 +5,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "lp_nn_robustness_verification"
 description = """
-This package accompanies my Master's thesis on GUM-compliant neural network robustness\
-verification and provides an implementation using PySCIPOpt.\
+This code base is intended to serve as a starting point for interested researchers or\
+practitioners to extend or apply the robustness verification portion of the author's\
+Master's thesis "GUM-compliant neural-network robustness verification".\
+It provides an implementation using PySCIPOpt for Python 3.10.\
 """
 readme = "README.md"
 requires-python = ">=3.10"
