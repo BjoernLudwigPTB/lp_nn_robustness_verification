@@ -26,7 +26,6 @@ abstract: >-
 keywords:
   - robustness verification
   - linear programming
-  - GUM
   - neural networks
   - pyscipopt
 license: MIT
