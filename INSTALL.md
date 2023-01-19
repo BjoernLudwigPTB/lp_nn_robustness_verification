@@ -1,5 +1,13 @@
 # Installation
 
+Before you can use lp_nn_robustness_verification, you need a working installation of 
+the [SCIP Optimization suite](https://www.scipopt.org/). Please review [SCIP's 
+license restrictions](https://scipopt.org/index.php#license) before installing 
+lp_nn_robustness_verification.
+
+After successfully completing all steps in [their official installation
+guide](https://scipopt.org/doc/html/INSTALL.php), you can proceed here.
+
 There is a [quick way](#quick-setup-not-recommended) to get started, but we advise 
 setting up a virtual environment and guide through the process in the section
 [Proper Python setup with virtual environment
@@ -124,3 +132,23 @@ Collecting [...]
 Successfully installed [...]
 (lp_nn_robustness_verification_venv) $
 ```
+
+### Optional dependencies
+
+For the different stages of using or developing lp_nn_robustness_verification we 
+have provided several requirements files with pinned versions. Instead of 
+`requirements.txt` in the above command, you can choose one of the following 
+depending on your task:
+
+- `[all-requirements.txt](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/all-requirements.txt)`:
+  if you want to cover all cases and simply install all optional dependencies in a
+  known to work configuration
+- `[examples-requirements.txt](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/examples-requirements.txt)`: 
+  for experimenting with the [provided
+  examples](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/tree/main/src/lp_nn_robustness_verification/examples)
+- `[dev-requirements.txt](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/dev-requirements.txt)`:
+  for starting to work on the code. Please contact
+  [us](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/graphs/contributors),
+  if you have any questions.
+- `[docs-requirements.txt](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/docs-requirements.txt)`:
+  if you want to build the documentation locally

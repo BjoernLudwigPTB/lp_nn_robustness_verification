@@ -1,7 +1,8 @@
 # Neural network robustness verification via Linear Programming
 
 [![pipeline status](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/badges/main/pipeline.svg)](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commits/main)
-[![Latest Release](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/badges/release.svg)](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/releases)
+[![Latest Release](https://img.shields.io/github/v/release/BjoernLudwigPTB/lp_nn_robustness_verification?label=Latest%20release)](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/releases/latest)
+[![DOI](https://zenodo.org/badge/587113361.svg)](https://zenodo.org/badge/latestdoi/587113361)
 
 This is the code written in conjunction with the second part of my Master's thesis on 
 GUM-compliant neural network robustness verification. The code was written for 
@@ -39,4 +40,20 @@ _docs/\_build/index.html_ in any browser.
 
 ## Roadmap
 
-- check what improvements are made by switching to optimizable variables for the $r_i$s
+- check what improvements are made by switching to optimizable variables for the $r_i$ s
+- make the documentation available on ReadTheDocs
+
+## Disclaimer
+
+This software is developed under the sole responsibility of [Björn
+Ludwig](https://github.com/BjoernLudwigPTB) (the author in the following). The 
+software is made available "as is" free of cost. The author assumes no 
+responsibility whatsoever for its use by other parties, and makes no guarantees, 
+expressed or implied, about its quality, reliability, safety, suitability or any 
+other characteristic. In no event will the author be liable for any direct, indirect or 
+consequential damage arising in connection with the use of this software.
+
+## License
+
+lp_nn_robustness_verification is distributed under the [MIT
+license](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/LICENSE).
