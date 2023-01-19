@@ -41,7 +41,6 @@ _docs/\_build/index.html_ in any browser.
 ## Roadmap
 
 - check what improvements are made by switching to optimizable variables for the $r_i$ s
-- make the documentation available on ReadTheDocs
 
 ## Disclaimer
 
