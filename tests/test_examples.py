@@ -14,9 +14,7 @@ from lp_nn_robustness_verification.examples.solve_one_instance import optimize
 @pytest.fixture(scope="module")
 def file_deleter() -> Callable[[tuple[str, ...]], None]:
     def deleter(endings: tuple[str, ...]) -> None:
-        for file in chain(
-            *(glob(f"*{ending}") for ending in endings)
-        ):
+        for file in chain(*(glob(f"*{ending}") for ending in endings)):
             try:
                 os.remove(file)
             except FileNotFoundError:
