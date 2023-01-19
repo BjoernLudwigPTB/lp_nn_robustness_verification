@@ -81,21 +81,24 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
                     idx_start, seed
                 )
                 optimization.model.writeProblem(
-                    filename=f"solved_problem_for_{size_scaler}_inputs_and_"
+                    filename=f"solved_problem_for_"
+                    f"{size_scaler * 11}_inputs_and_"
                     f"{depth}_layers_with_sample_{idx_start}_and_seed_{seed}.cip"
                 )
                 optimization.model.writeProblem(
-                    filename=f"solved_transformed_problem_for_{size_scaler}_inputs_and_"
+                    filename=f"solved_transformed_problem_for_"
+                    f"{size_scaler * 11}_inputs_and_"
                     f"{depth}_layers_with_sample_{idx_start}_and_seed_{seed}.cip",
                     trans=True,
                 )
                 optimization.model.writeBestSol(
-                    filename=f"best_solution_for_{size_scaler}_inputs_and_"
+                    filename=f"best_solution_for_"
+                    f"{size_scaler * 11}_inputs_and_"
                     f"{depth}_layers_with_sample_{idx_start}_and_seed_{seed}.sol"
                 )
                 optimization.model.writeBestTransSol(
                     filename=f"best_solution_for_transformed_problem"
-                    f"_{size_scaler}_inputs_and_"
+                    f"_{size_scaler * 11}_inputs_and_"
                     f"{depth}_layers_with_sample_{idx_start}_and_seed_{seed}.sol"
                 )
                 break
