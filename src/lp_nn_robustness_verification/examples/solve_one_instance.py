@@ -66,7 +66,7 @@ def optimize() -> None:
                 f"\n==================================================================="
                 f"===================\n"
             )
-            yappi.get_func_stats().print_all(  # type: ignore[import]
+            yappi.get_func_stats().print_all(
                 out=timings_file, columns={0: ("name", 180), 3: ("ttot", 8)}
             )
 
