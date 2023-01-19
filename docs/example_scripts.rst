@@ -6,4 +6,4 @@ Optimize
 Solve chosen instances for several network architectures
 ========================================================
 
-.. literalinclude:: examples/find_seeds_and_samples.py
+.. literalinclude:: examples/solve_instances_in_parallel.py

@@ -1,6 +1,7 @@
 """An implementation of a parallelized search for valid instances and their results"""
 import sys
 
+import yappi  # type: ignore[import]
 from zema_emc_annotated.dataset import ZeMASamples  # type: ignore[import]
 
 from lp_nn_robustness_verification.data_acquisition.activation_functions import (
@@ -18,7 +19,7 @@ from lp_nn_robustness_verification.linear_program import RobustVerifier
 from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
 
-def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
+def solve_and_store_timed_solutions(task_id: int, proc_id: int) -> None:
     """Iterate over all possible parameter choices to find valid examples
 
     Parameters
@@ -28,7 +29,6 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
     proc_id : int
         parameter to parallelize workload, expected to lie between 0 and 3 each included
     """
-    valid_seeds: dict[ScalerAndLayers, IndexAndSeed] = {}
     size_scalers: list[int] = [1, 10, 100, 1000, 2000]
     size_scaler = size_scalers[task_id]
     depths: list[int] = [1, 3, 5, 8]
@@ -46,12 +46,15 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
     )
     solved = False
     for idx_start in range(100):
+        if solved:
+            break
         uncertain_inputs = UncertainInputs(
             UncertainArray(
                 zema_data.values[idx_start], zema_data.uncertainties[idx_start]
             )
         )
         for seed in range(100):
+            yappi.start()
             linear_inclusion = LinearInclusion(
                 uncertain_inputs,
                 Sigmoid,
@@ -67,33 +70,58 @@ def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
             )
             optimization = RobustVerifier(linear_inclusion)
             optimization.solve()
+            yappi.stop()
             if optimization.model.getSols():
-                valid_seeds[ScalerAndLayers(size_scaler, depth)] = IndexAndSeed(
-                    idx_start, seed
+                solved = True
+                with open(
+                    f"{size_scaler * 11}_inputs_and_{depth}_layers_with_sample_"
+                    f"{idx_start}_and_seed_{seed}_"
+                    f"timings.txt",
+                    "a",
+                    encoding="utf-8",
+                ) as timings_file:
+                    timings_file.write(
+                        f"\n==========================================================="
+                        f"===========================\n"
+                        f"Timings for {size_scaler * 11} inputs and {depth} "
+                        f"{'layers' if depth > 1 else 'layer'} with sample 0 and seed 0"
+                        f"\n==========================================================="
+                        f"===========================\n"
+                    )
+                    yappi.get_func_stats().print_all(
+                        out=timings_file, columns={0: ("name", 180), 3: ("ttot", 8)}
+                    )
+                optimization.model.writeProblem(
+                    filename=(
+                        f"{size_scaler * 11}_inputs_and_{depth}_layers_with_sample_"
+                        f"{idx_start}_and_seed_{seed}_"
+                        f"solved_problem.cip"
+                    )
                 )
                 optimization.model.writeProblem(
-                    filename=f"solved_problem_for_"
-                    f"{size_scaler * 11}_inputs_and_"
-                    f"{depth}_layers_with_sample_{idx_start}_and_seed_{seed}.cip"
-                )
-                optimization.model.writeProblem(
-                    filename=f"solved_transformed_problem_for_"
-                    f"{size_scaler * 11}_inputs_and_"
-                    f"{depth}_layers_with_sample_{idx_start}_and_seed_{seed}.cip",
+                    filename=(
+                        f"{size_scaler * 11}_inputs_and_{depth}_layers_with_sample_"
+                        f"{idx_start}_and_seed_{seed}_"
+                        f"solved_transformed_problem.cip"
+                    ),
                     trans=True,
                 )
                 optimization.model.writeBestSol(
-                    filename=f"best_solution_for_"
-                    f"{size_scaler * 11}_inputs_and_"
-                    f"{depth}_layers_with_sample_{idx_start}_and_seed_{seed}.sol"
+                    filename=(
+                        f"{size_scaler * 11}_inputs_and_{depth}_layers_with_sample_"
+                        f"{idx_start}_and_seed_{seed}_"
+                        f"best_solution.sol"
+                    )
                 )
                 optimization.model.writeBestTransSol(
-                    filename=f"best_solution_for_transformed_problem"
-                    f"_{size_scaler * 11}_inputs_and_"
-                    f"{depth}_layers_with_sample_{idx_start}_and_seed_{seed}.sol"
+                    filename=(
+                        f"{size_scaler * 11}_inputs_and_{depth}_layers_with_sample_"
+                        f"{idx_start}_and_seed_{seed}_"
+                        f"best_solution_for_transformed_problem.sol"
+                    )
                 )
                 break
 
 
 if __name__ == "__main__":
-    find_seeds_and_samples(int(sys.argv[1]), int(sys.argv[2]))
+    solve_and_store_timed_solutions(int(sys.argv[1]), int(sys.argv[2]))
