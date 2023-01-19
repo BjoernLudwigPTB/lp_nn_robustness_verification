@@ -165,7 +165,7 @@ packaging==23.0
     #   jupyter-server
     #   nbconvert
     #   pooch
-pandas==1.5.2
+pandas==1.5.3
     # via lp-nn-robustness-verification (setup.py)
 pandocfilters==1.5.0
     # via nbconvert
@@ -292,7 +292,7 @@ traitlets==5.8.1
     #   nbconvert
     #   nbformat
     #   notebook
-types-tqdm==4.64.7.10
+types-tqdm==4.64.7.11
     # via lp-nn-robustness-verification (setup.py)
 uri-template==1.2.0
     # via jsonschema
