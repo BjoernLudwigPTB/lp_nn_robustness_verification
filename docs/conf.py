@@ -141,7 +141,7 @@ root_doc = "index"
 
 # General information about the project.
 project = "lp_nn_robustness_verification"
-copyright = "2022, B. Ludwig (PTB)"
+copyright = "2023, B. Ludwig (PTB)"
 author = "B. Ludwig"
 
 # The version info for the project you're documenting, acts as replacement for
