@@ -25,65 +25,60 @@ from lp_nn_robustness_verification.linear_program import RobustnessVerification
 from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
 
-def find_seeds_and_samples(task_id: int, proc_id: int) -> None:
+def find_seeds_and_samples(proc_id: int) -> None:
     """Iterate over all possible parameter choices to find valid examples
 
     Parameters
     ----------
-    task_id : int
-        expected to lie between 0 and 7 each included
     proc_id : int
-        expected to lie between 0 and 27 each included
+        expected to lie between 0 and 3 each included
     """
     valid_seeds: dict[ScalerAndLayers, IndexAndSeed] = {}
-    size_scalers: list[int] = [1, 10]
+    size_scalers: list[int] = [1000, 2000]
     depths: list[int] = [1, 3, 5, 8]
+    depth = depths[proc_id]
     for size_scaler in size_scalers:
         zema_data = ZeMASamples(100, size_scaler, True)
-        for depth in depths:
-            print(f"Trying to find seed for {ScalerAndLayers(size_scaler, depth)}")
-            for idx_start in range(100):
-                uncertain_inputs = UncertainInputs(
-                    UncertainArray(
-                        zema_data.values[idx_start], zema_data.uncertainties[idx_start]
-                    )
+        print(f"Trying to solve for {ScalerAndLayers(size_scaler, depth)}")
+        for idx_start in range(100):
+            uncertain_inputs = UncertainInputs(
+                UncertainArray(
+                    zema_data.values[idx_start], zema_data.uncertainties[idx_start]
                 )
-                if valid_seeds.get(ScalerAndLayers(size_scaler, depth)) is not None:
-                    print(f"valid seeds: {valid_seeds}")
-                    with open(
-                        f"{size_scaler}_{depth}.txt", "a", encoding="utf-8"
-                    ) as valid_seeds_file:
-                        fcntl.flock(valid_seeds_file, fcntl.LOCK_EX)
-                        valid_seeds_file.write(str(valid_seeds) + "\n")
-                        fcntl.flock(valid_seeds_file, fcntl.LOCK_UN)
-                    valid_seeds = {}
-                    break
-                for seed in range(
-                    1000000 // (28 * 8) * (task_id * 28 + proc_id),
-                    1000000 // (28 * 8) * (task_id * 28 + proc_id + 1),
-                ):
-                    linear_inclusion = LinearInclusion(
-                        uncertain_inputs,
-                        Sigmoid,
-                        generate_weights_and_biases(
+            )
+            if valid_seeds.get(ScalerAndLayers(size_scaler, depth)) is not None:
+                print(f"valid seeds: {valid_seeds}")
+                with open(
+                    f"{size_scaler}_{depth}.txt", "a", encoding="utf-8"
+                ) as valid_seeds_file:
+                    fcntl.flock(valid_seeds_file, fcntl.LOCK_EX)
+                    valid_seeds_file.write(str(valid_seeds) + "\n")
+                    fcntl.flock(valid_seeds_file, fcntl.LOCK_UN)
+                valid_seeds = {}
+                break
+            for seed in range(100):
+                linear_inclusion = LinearInclusion(
+                    uncertain_inputs,
+                    Sigmoid,
+                    generate_weights_and_biases(
+                        len(uncertain_inputs.values),
+                        construct_out_features_counts(
                             len(uncertain_inputs.values),
-                            construct_out_features_counts(
-                                len(uncertain_inputs.values),
-                                out_features=size_scaler * 11 - depth,
-                                depth=depth,
-                            ),
-                            seed,
+                            out_features=size_scaler * 11 - depth,
+                            depth=depth,
                         ),
+                        seed,
+                    ),
+                )
+                optimization = RobustnessVerification(linear_inclusion)
+                optimization.model.hideOutput()
+                optimization.solve()
+                if optimization.model.getSols():
+                    valid_seeds[ScalerAndLayers(size_scaler, depth)] = IndexAndSeed(
+                        idx_start, seed
                     )
-                    optimization = RobustnessVerification(linear_inclusion)
-                    optimization.model.hideOutput()
-                    optimization.solve()
-                    if optimization.model.getSols():
-                        valid_seeds[ScalerAndLayers(size_scaler, depth)] = IndexAndSeed(
-                            idx_start, seed
-                        )
-                        break
+                    break
 
 
 if __name__ == "__main__":
-    find_seeds_and_samples(int(sys.argv[1]), int(sys.argv[2]))
+    find_seeds_and_samples(int(sys.argv[1]))

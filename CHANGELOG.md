@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v0.5.0 (2023-01-19)
+### Feature
+* **activation_functions:** Introduce Identity activation function ([`9dac464`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/9dac46416dd535e6b3bafa3ae596e880fb04bf77))
+* **linear_program:** Replace auxiliary variable by direct objective and thus fix residing issue ([`27021f4`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/27021f47b6e8c2ca184c1694af4572dd932cbbb9))
+* **linear_program:** Introduce generic base class and two classes for original and adapted problem ([`a17389e`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/a17389e20d77305401ead6d66356d976ac7f9980))
+* **data_types:** Introduce IndexAndSeed data_type for streamlined implementation of example ([`03c5123`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/03c512336d684605845655168c3a186e206cbad7))
+* **examples:** Introduce task id parameter to parallelize and streamline implementation ([`e82582b`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/e82582bfbbba10cb0c9c0ea31230e771cd556511))
+* **examples:** Introduce script to find valid combinations of seeds, samples, sizes and depths ([`954d204`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/954d204b7447cb79fbbcd12fd13f23472ffc75aa))
+* **data_types:** Capture the index of the valid samples from the ZeMA dataset ([`c50a8f6`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/c50a8f68355036e3003c176a075df82c573da43c))
+
+### Documentation
+* **linear_inclusion notebook:** Update with most recent version of zema_emc_annotated ([`10e9b69`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/10e9b698e399ee03f1643ee6c58aa5b993519336))
+
 ## v0.4.0 (2023-01-07)
 ### Feature
 * **uncertain_inputs:** Introduce direct value und uncertainties access for UncertainInputs ([`98a72aa`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/98a72aaceec8f43ffec1882cb97d3af87660f087))
