@@ -123,8 +123,7 @@ activating:
 Collecting pip-tools
 [...]
 Successfully installed pip-tools-6.11.0
-(lp_nn_robustness_verification_venv) $ python -m piptools sync 
-requirements.txt
+(lp_nn_robustness_verification_venv) $ python -m piptools sync
 Collecting [...]
 [...]
 Successfully installed [...]
@@ -134,9 +133,10 @@ Successfully installed [...]
 ### Optional dependencies
 
 For the different stages of using or developing lp_nn_robustness_verification we 
-have provided several requirements files with pinned versions. Instead of 
-`requirements.txt` in the above command, you can choose one of the following 
-depending on your task:
+have provided several requirements files with pinned versions. You can append any of 
+the following file names to the above `piptools sync` command depending on your task,
+e.g. `$ python -m piptools sync all-requirements.txt`. Below you find a description 
+of the files purposes, despite their self-explanatory names:
 
 - [`all-requirements.txt`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/blob/main/all-requirements.txt):
   if you want to cover all cases and simply install all optional dependencies in a
