@@ -18,13 +18,18 @@ GUM-compliant neural network robustness verification
 
 .. toctree::
    :maxdepth: 1
+   :caption: Examples:
+
+   examples
+
+.. toctree::
+   :maxdepth: 1
    :caption: Code Reference:
 
    lp_nn_robustness_verification.pre_processing
    lp_nn_robustness_verification.data_acquisition
    lp_nn_robustness_verification.data_types
    lp_nn_robustness_verification.linear_program
-   lp_nn_robustness_verification.optimize
 
 Indices and tables
 ==================
