@@ -27,4 +27,6 @@ junit.xml
 ############################
 **/datasets
 **/*.ipynb
-**/timings_*.txt
+**/*_timings.txt
+**/*.sol
+**/*.cip
