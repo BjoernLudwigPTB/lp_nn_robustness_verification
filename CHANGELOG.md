@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v0.6.0 (2023-01-19)
+### Feature
+* **CITATION.cff:** Introduce DOI ([`942bea6`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/942bea652e40decc9e915d2deb50d423c6d7ad9e))
+
+### Fix
+* **README:** Finalize README with mandatory sections ([`0c6d01b`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/0c6d01b08bf1d51a6f6cc6fbc68e667e25b73d56))
+
+### Documentation
+* **INSTALL:** Finalize installation instructions ([`cf66be8`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/cf66be80a30f8bed567b706b39f97a9115ca90a1))
+* **README:** Introduce DOI and GitHub release badge ([`52f2477`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/52f24773084b2d8c54f69c2571af5035c5513bd6))
+
+**[See all commits in this version](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/compare/v0.5.0...v0.6.0)**
+
 ## v0.5.0 (2023-01-19)
 ### Feature
 * **activation_functions:** Introduce Identity activation function ([`9dac464`](https://gitlab1.ptb.de/ludwig10_masters_thesis/lp_nn_robustness_verification/-/commit/9dac46416dd535e6b3bafa3ae596e880fb04bf77))
