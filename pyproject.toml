@@ -36,6 +36,7 @@ file = "LICENSE"
 [project.optional-dependencies]
 dev = [
     "black[jupyter]",
+    "cffconvert",
     "flake8",
     "Flake8-pyproject",
     "hypothesis[numpy]",
