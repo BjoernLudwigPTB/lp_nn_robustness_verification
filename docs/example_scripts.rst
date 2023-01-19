@@ -1,7 +1,7 @@
 Optimize
 ========
 
-.. literalinclude:: examples/optimize.py
+.. literalinclude:: examples/solve_one_instance.py
 
 Solve chosen instances for several network architectures
 ========================================================
