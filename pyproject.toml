@@ -49,6 +49,7 @@ dev = [
 ]
 docs = [
     "myst-parser",
+    "nbsphinx",
     "sphinx",
     "sphinx-rtd-theme",
 ]
