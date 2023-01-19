@@ -40,4 +40,4 @@ _docs/\_build/index.html_ in any browser.
 
 ## Roadmap
 
-- check what improvements are made by switching to optimizable variables for the $r_i$s
+- check what improvements are made by switching to optimizable variables for the $r_i$ s
