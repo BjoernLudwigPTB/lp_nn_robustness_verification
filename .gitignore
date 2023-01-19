@@ -11,6 +11,7 @@ docs/_build
 docs/CHANGELOG.md
 docs/INSTALL.md
 docs/README.md
+docs/examples/
 
 ######################
 ### Test artifacts ###
