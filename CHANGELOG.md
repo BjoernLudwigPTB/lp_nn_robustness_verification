@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v0.7.0 (2023-01-20)
+### Feature
+* **pre_processing:** Utilize timing module in pre-processing ([`c7926cb`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/c7926cbed7bb378d01006955b352f76406a32360))
+* **timing:** Introduce module to time and store progress ([`dddd24d`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/dddd24d129ddb533ca1d286531384c4fc60f80ca))
+
+### Documentation
+* **timing:** Introduce timing module into docs ([`5670c98`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/5670c982382ecc0a627ef5307c35f55e68235133))
+
+**[See all commits in this version](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/compare/v0.6.1...v0.7.0)**
+
 ## v0.6.1 (2023-01-19)
 ### Fix
 * **linear_program:** Remove any clutter from linear_program after finding same results in all cases ([`e4d1f2f`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/e4d1f2fa6d51e7b07402609693c2f125941d7e11))

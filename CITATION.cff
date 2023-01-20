@@ -29,7 +29,7 @@ keywords:
   - neural networks
   - pyscipopt
 license: MIT
-version: 0.6.1
+version: 0.7.0
 identifiers:
   - description: >-
       This is the general DOI to cite all versions of the software. To cite a specific
