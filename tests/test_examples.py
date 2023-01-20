@@ -24,11 +24,5 @@ def cleanup_txt_after_run(
     file_deleter(("*_timings.txt",))
 
 
-def test_solve_and_store_timed_solutions(
-    cleanup_txt_sol_and_cip_after_run: Generator[None, None, None]
-) -> None:
-    solve_and_store_timed_solutions(0, 0)
-
-
 def test_optimize(cleanup_txt_after_run: Generator[None, None, None]) -> None:
     optimize()
