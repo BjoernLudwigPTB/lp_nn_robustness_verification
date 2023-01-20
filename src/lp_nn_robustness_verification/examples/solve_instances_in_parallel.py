@@ -17,6 +17,7 @@ from lp_nn_robustness_verification.data_acquisition.uncertain_inputs import (
 from lp_nn_robustness_verification.data_types import UncertainArray
 from lp_nn_robustness_verification.linear_program import RobustVerifier
 from lp_nn_robustness_verification.pre_processing import LinearInclusion
+from lp_nn_robustness_verification.timing import write_current_timing_stats
 
 
 def solve_and_store_timed_solutions(task_id: int) -> None:
@@ -69,26 +70,15 @@ def solve_and_store_timed_solutions(task_id: int) -> None:
             optimization = RobustVerifier(linear_inclusion)
             optimization.solve()
             yappi.stop()
+            write_current_timing_stats(
+                f"{size_scaler * 11}_inputs_and_{depth}_layers_with_sample_"
+                f"{idx_start}_and_seed_{seed}_"
+                f"timings.txt",
+                "Everything has been done",
+                "a",
+            )
             if optimization.model.getSols():
                 solved = True
-                with open(
-                    f"{size_scaler * 11}_inputs_and_{depth}_layers_with_sample_"
-                    f"{idx_start}_and_seed_{seed}_"
-                    f"timings.txt",
-                    "a",
-                    encoding="utf-8",
-                ) as timings_file:
-                    timings_file.write(
-                        f"\n==========================================================="
-                        f"===========================\n"
-                        f"Timings for {size_scaler * 11} inputs and {depth} "
-                        f"{'layers' if depth > 1 else 'layer'} with sample 0 and seed 0"
-                        f"\n==========================================================="
-                        f"===========================\n"
-                    )
-                    yappi.get_func_stats().print_all(
-                        out=timings_file, columns={0: ("name", 180), 3: ("ttot", 8)}
-                    )
                 optimization.model.writeProblem(
                     filename=(
                         f"{size_scaler * 11}_inputs_and_{depth}_layers_with_sample_"
