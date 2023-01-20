@@ -2,9 +2,6 @@ from typing import Callable, Generator
 
 import pytest
 
-from lp_nn_robustness_verification.examples.solve_instances_in_parallel import (
-    solve_and_store_timed_solutions,
-)
 from lp_nn_robustness_verification.examples.solve_one_instance import optimize
 
 
