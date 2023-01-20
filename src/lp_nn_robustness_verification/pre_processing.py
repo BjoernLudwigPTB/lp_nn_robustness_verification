@@ -17,6 +17,7 @@ from lp_nn_robustness_verification.data_types import (
     NNParams,
     VectorOfRealVectors,
 )
+from lp_nn_robustness_verification.timing import write_current_timing_stats
 
 
 @dataclass
@@ -83,6 +84,14 @@ class LinearInclusion:
                 for j_idx, weight in enumerate(weight_vector):
                     z_i[k_idx] += float(weight) * theta_is[-1][j_idx]
             z_is.append(Intervals(z_i))
+            write_current_timing_stats(
+                f"{len(self.uncertain_inputs.values)}_inputs_and"
+                f"_{len(self.nn_params.weights)}_layers_with_sample_"
+                f"0_and_seed_0_"
+                f"timings.txt",
+                f"z^({len(z_is)}) computation finished",
+                "a",
+            )
             theta_i = []
             for z_k in z_is[-1]:
                 theta_i.append(
@@ -99,6 +108,14 @@ class LinearInclusion:
                 Intervals(
                     theta_i,
                 )
+            )
+            write_current_timing_stats(
+                f"{len(self.uncertain_inputs.values)}_inputs_and"
+                f"_{len(self.nn_params.weights)}_layers_with_sample_"
+                f"0_and_seed_0_"
+                f"timings.txt",
+                f"theta^({len(z_is)}) computation finished",
+                "a",
             )
         self.z_is = IntervalCollection(
             z_is,
@@ -118,6 +135,14 @@ class LinearInclusion:
             for z_k in z_i:
                 xi_ks.append(z_k.midpoint[0].inf)
             xi_is.append(np.array(xi_ks))
+            write_current_timing_stats(
+                f"{len(self.uncertain_inputs.values)}_inputs_and"
+                f"_{len(self.nn_params.weights)}_layers_with_sample_"
+                f"0_and_seed_0_"
+                f"timings.txt",
+                f"xi^({len(xi_is)}) computation finished",
+                "a",
+            )
             assert len(xi_ks) == len(z_i), (
                 f"Somehow there is not one xi_k^(i) for every of the {len(z_i)}, "
                 f"z_k^(i), but only {len(xi_ks)}"
@@ -145,6 +170,14 @@ class LinearInclusion:
                 Intervals(
                     r_i,
                 )
+            )
+            write_current_timing_stats(
+                f"{len(self.uncertain_inputs.values)}_inputs_and"
+                f"_{len(self.nn_params.weights)}_layers_with_sample_"
+                f"0_and_seed_0_"
+                f"timings.txt",
+                f"r^({len(r_is)}) computation finished",
+                "a",
             )
         self.r_is = IntervalCollection(r_is)
 
