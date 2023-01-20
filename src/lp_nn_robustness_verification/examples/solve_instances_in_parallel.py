@@ -19,7 +19,7 @@ from lp_nn_robustness_verification.linear_program import RobustVerifier
 from lp_nn_robustness_verification.pre_processing import LinearInclusion
 
 
-def solve_and_store_timed_solutions(task_id: int, proc_id: int) -> None:
+def solve_and_store_timed_solutions(task_id: int) -> None:
     """Iterate over all possible parameter choices to find valid examples
 
     Parameters
@@ -124,4 +124,4 @@ def solve_and_store_timed_solutions(task_id: int, proc_id: int) -> None:
 
 
 if __name__ == "__main__":
-    solve_and_store_timed_solutions(int(sys.argv[1]), int(sys.argv[2]))
+    solve_and_store_timed_solutions(int(sys.argv[1]))
