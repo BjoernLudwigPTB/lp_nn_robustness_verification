@@ -26,8 +26,6 @@ def solve_and_store_timed_solutions(task_id: int) -> None:
     ----------
     task_id : int
         parameter to parallelize workload, expected to lie between 0 and 7 each included
-    proc_id : int
-        parameter to parallelize workload, expected to lie between 0 and 1 each included
     """
     size_scalers: list[int] = [1000, 2000]
     size_scaler = size_scalers[task_id // 4]
