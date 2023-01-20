@@ -29,10 +29,10 @@ def solve_and_store_timed_solutions(task_id: int, proc_id: int) -> None:
     proc_id : int
         parameter to parallelize workload, expected to lie between 0 and 1 each included
     """
-    size_scalers: list[int] = [10, 100, 1000, 2000]
-    size_scaler = size_scalers[task_id // 2]
+    size_scalers: list[int] = [1000, 2000]
+    size_scaler = size_scalers[task_id // 4]
     depths: list[int] = [1, 3, 5, 8]
-    depth = depths[proc_id + (task_id % 2) * 2]
+    depth = depths[task_id % 4]
     if size_scaler * 11 - depth >= 100:
         out_features = 100
     elif size_scaler * 11 - depth < 10:
