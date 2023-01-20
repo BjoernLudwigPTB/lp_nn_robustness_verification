@@ -30,6 +30,7 @@ GUM-compliant neural network robustness verification
    lp_nn_robustness_verification.data_acquisition
    lp_nn_robustness_verification.data_types
    lp_nn_robustness_verification.linear_program
+   lp_nn_robustness_verification.timing
 
 Indices and tables
 ==================
