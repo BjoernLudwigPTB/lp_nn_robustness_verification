@@ -314,5 +314,5 @@ widgetsnbextension==4.0.5
     # via ipywidgets
 yappi==1.4.0
     # via lp-nn-robustness-verification (setup.py)
-zema-emc-annotated==0.4.0
+zema-emc-annotated==0.7.0
     # via lp-nn-robustness-verification (setup.py)
