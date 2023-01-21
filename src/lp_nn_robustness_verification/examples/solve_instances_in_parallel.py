@@ -2,6 +2,7 @@
 import sys
 
 import yappi  # type: ignore[import]
+from zema_emc_annotated.data_types import SampleSize  # type: ignore[import]
 from zema_emc_annotated.dataset import ZeMASamples  # type: ignore[import]
 
 from lp_nn_robustness_verification.data_acquisition.activation_functions import (
@@ -38,7 +39,9 @@ def solve_and_store_timed_solutions(task_id: int) -> None:
         out_features = size_scaler * 11 - depth
     else:
         out_features = 10
-    zema_data = ZeMASamples(100, size_scaler, True)
+    zema_data = ZeMASamples(
+        SampleSize(0, 100, datapoints_per_cycle=size_scaler), normalize=True
+    )
     print(
         f"Trying to solve for {size_scaler * 11} inputs and {depth} "
         f"{'layers' if depth > 1 else 'layer'}"

@@ -5,6 +5,7 @@ import pytest
 from _pytest.capture import CaptureFixture
 from numpy.ma.testutils import assert_almost_equal
 from numpy.testing import assert_equal
+from zema_emc_annotated.data_types import SampleSize  # type: ignore[import]
 from zema_emc_annotated.dataset import ZeMASamples  # type: ignore[import]
 
 from lp_nn_robustness_verification.data_acquisition.activation_functions import (
@@ -67,7 +68,9 @@ def compute_linear_inclusion_for_instance() -> Callable[
     def compute_linear_inclusion(
         size_scaler: int, depth: int, sample_idx: int, seed: int
     ) -> LinearInclusion:
-        zema_data = ZeMASamples(4766, size_scaler, True)
+        zema_data = ZeMASamples(
+            SampleSize(n_cycles=4766, datapoints_per_cycle=size_scaler), normalize=True
+        )
         uncertain_inputs = UncertainInputs(
             UncertainArray(
                 zema_data.values[sample_idx], zema_data.uncertainties[sample_idx]

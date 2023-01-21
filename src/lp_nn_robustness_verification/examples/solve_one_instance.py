@@ -15,6 +15,7 @@ We might add command line parameters at a later time. For now please edit the ma
 function at the very bottom of this file to change inputs.
 """
 import yappi  # type: ignore[import]
+from zema_emc_annotated.data_types import SampleSize  # type: ignore[import]
 from zema_emc_annotated.dataset import ZeMASamples  # type: ignore[import]
 
 from lp_nn_robustness_verification.data_acquisition.activation_functions import Sigmoid
@@ -34,7 +35,7 @@ def optimize() -> None:
     """Solve one specific hard coded instance and time the process"""
     samples_per_sensor = 10
     depth = 1
-    zema_data = ZeMASamples(size_scaler=samples_per_sensor, normalize=True)
+    zema_data = ZeMASamples(SampleSize(datapoints_per_cycle=samples_per_sensor), True)
     nn_params = generate_weights_and_biases(
         len(zema_data.values[0]),
         construct_out_features_counts(len(zema_data.values[0]), depth=depth),
