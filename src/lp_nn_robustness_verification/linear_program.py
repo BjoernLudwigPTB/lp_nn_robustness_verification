@@ -42,7 +42,7 @@ class RobustVerifier:
         self._add_objective()
 
     def _add_vars_x_i_in_theta_i(self) -> None:
-        for i_idx, theta_i in enumerate(self.linear_inclusion.theta):
+        for i_idx, theta_i in enumerate(self.linear_inclusion.theta_is):
             for k_idx, theta_i_k in enumerate(theta_i):
                 self.x_is[i_idx, k_idx] = self.model.addVar(
                     name=f"x_{k_idx}^({i_idx})",
@@ -106,11 +106,11 @@ class RobustVerifier:
             self.linear_inclusion.activation,
             self.linear_inclusion.nn_params,
         )
-        for neuron_idx in range(len(self.linear_inclusion.theta[-1])):
+        for neuron_idx in range(len(self.linear_inclusion.theta_is[-1])):
             if neuron_idx != label:
                 self.model.setObjective(
-                    self.x_is[len(self.linear_inclusion.theta) - 1, label]
-                    - self.x_is[len(self.linear_inclusion.theta) - 1, neuron_idx],
+                    self.x_is[len(self.linear_inclusion.theta_is) - 1, label]
+                    - self.x_is[len(self.linear_inclusion.theta_is) - 1, neuron_idx],
                     "minimize",
                 )
 
