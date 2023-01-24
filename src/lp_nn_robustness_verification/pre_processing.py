@@ -125,9 +125,9 @@ class LinearInclusion:
         )
 
     def _compute_xi_is(self) -> None:
-        """Compute the midpoints of the intervals of the linear transformation's results
+        r"""Compute the midpoints of the intervals of the :math:`\Theta^{(i)}`
 
-        For details see Equation 3.9 of Definition 3.2.10 in [Ludwig2023]_.
+        For details see Equation 3.13 of Definition 3.2.17 in [Ludwig2023]_.
         """
         xi_is = []
         for theta_i in self.theta_is[1:]:
@@ -156,7 +156,7 @@ class LinearInclusion:
     def _compute_r_is(self) -> None:
         """Compute the residual terms the linear inclusions linear approximation
 
-        For details see Equation 3.10 of Definition 3.2.10 in [Ludwig2023]_.
+        For details see Equation 3.15 of Definition 3.2.17 in [Ludwig2023]_.
         """
         r_is = []
         for xi_i, z_i in zip(self.xi_is, self.z_is):
@@ -184,7 +184,7 @@ class LinearInclusion:
     def _taylors_residual(self, xi_k: float, z_k: interval) -> interval:
         """Compute the residual term of the taylor approximation at the midpoint of z_k
 
-        For details see Equation 3.10 of Definition 3.2.10 in [Ludwig2023]_.
+        For details see Equation 3.15 of Definition 3.2.17 in [Ludwig2023]_.
         """
         return (
             interval[
