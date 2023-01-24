@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v0.8.0 (2023-01-24)
+### Feature
+* **CITATION:** Introduce reference to PySCIPOpt and data ([`4c1d4bb`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/4c1d4bb28f3b4f9b6d38295bdd0bdcca24e9041b))
+* **timing_evaluation notebook:** Introduce timing evaluation in jupyter notebook ([`a84e2cf`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/a84e2cff5ea448a6f03c69bf9d390e3e3a8f1c60))
+
+### Fix
+* **pre_processing:** Replace z_i by theta_i in the calculation of xi_i ([`cc1d9c8`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/cc1d9c8941ec49bb72de2faf03086838bedc3377))
+* Adapt all calls of ZeMASamples to most recent version v0.7.0 of zema_emc_annotated ([`6807f6b`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/6807f6b919a18b38f6b3c826faff8116ca5b3ba4))
+
+### Documentation
+* **timing_evaluation notebook:** Introduce timing evaluation jupyter notebook ([`56e7bcb`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/56e7bcb59bc439337d302fdadd601777f51add75))
+
+**[See all commits in this version](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/compare/v0.7.0...v0.8.0)**
+
 ## v0.7.0 (2023-01-20)
 ### Feature
 * **pre_processing:** Utilize timing module in pre-processing ([`c7926cb`](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/commit/c7926cbed7bb378d01006955b352f76406a32360))
