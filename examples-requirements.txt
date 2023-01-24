@@ -117,6 +117,8 @@ jupyterlab-pygments==0.2.2
     # via nbconvert
 jupyterlab-widgets==3.0.5
     # via ipywidgets
+kaleido==0.2.1
+    # via lp-nn-robustness-verification (setup.py)
 markupsafe==2.1.2
     # via
     #   jinja2
