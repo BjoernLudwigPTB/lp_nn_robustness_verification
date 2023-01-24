@@ -25,8 +25,7 @@ junit.xml
 ############################
 ### Experiment artifacts ###
 ############################
-**/datasets
-**/*.ipynb
+**/.ipynb_checkpoints/
 **/*timings.txt
 **/*.sol
 **/*.cip
