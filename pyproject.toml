@@ -55,6 +55,7 @@ docs = [
 ]
 examples = [
     "ipywidgets",
+    "kaleido",
     "notebook",
     "pandas",
     "plotly",
