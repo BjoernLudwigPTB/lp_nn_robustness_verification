@@ -43,7 +43,7 @@ class LinearInclusion:
     activation: ActivationFunc
     nn_params: NNParams
     z_is: IntervalCollection
-    theta: IntervalCollection
+    theta_is: IntervalCollection
     xi_is: VectorOfRealVectors
     r_is: IntervalCollection
 
@@ -73,7 +73,7 @@ class LinearInclusion:
     def _compute_z_is_and_theta(self) -> None:
         r"""Compute the :math:`z^{(i)}` and :math:`\Theta^{(i)}, i = 1, \ldots, n^{(i)}`
 
-        For details see Equations 3.7 and 3.8 of Definition 3.2.10 in [Ludwig2023]_.
+        For details see Equations 3.10 to 3.12 of Definition 3.2.17 in [Ludwig2023]_.
         """
         z_is = []
         theta_is = [self.uncertain_inputs.theta_0]
@@ -120,7 +120,7 @@ class LinearInclusion:
         self.z_is = IntervalCollection(
             z_is,
         )
-        self.theta = IntervalCollection(
+        self.theta_is = IntervalCollection(
             theta_is,
         )
 
@@ -130,10 +130,10 @@ class LinearInclusion:
         For details see Equation 3.9 of Definition 3.2.10 in [Ludwig2023]_.
         """
         xi_is = []
-        for z_i in self.z_is:
+        for theta_i in self.theta_is[1:]:
             xi_ks = []
-            for z_k in z_i:
-                xi_ks.append(z_k.midpoint[0].inf)
+            for theta_k in theta_i:
+                xi_ks.append(theta_k.midpoint[0].inf)
             xi_is.append(np.array(xi_ks))
             write_current_timing_stats(
                 f"{len(self.uncertain_inputs.values)}_inputs_and"
@@ -143,9 +143,9 @@ class LinearInclusion:
                 f"xi^({len(xi_is)}) computation finished",
                 "a",
             )
-            assert len(xi_ks) == len(z_i), (
-                f"Somehow there is not one xi_k^(i) for every of the {len(z_i)}, "
-                f"z_k^(i), but only {len(xi_ks)}"
+            assert len(xi_ks) == len(theta_i), (
+                f"Somehow there is not one xi_k^(i) for every of the {len(theta_i)}, "
+                f"theta_k^(i), but only {len(xi_ks)}"
             )
         assert len(xi_is) == len(self.z_is), (
             f"Somehow there is not one xi^(i) for every of the {len(self.z_is)} z^(i), "
