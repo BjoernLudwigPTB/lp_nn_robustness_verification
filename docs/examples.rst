@@ -24,3 +24,4 @@ Jupyter Notebook
    :maxdepth: 1
 
    examples/linear_inclusion
+   examples/timing_evaluation
