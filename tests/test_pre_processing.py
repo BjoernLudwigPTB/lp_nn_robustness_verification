@@ -3,7 +3,7 @@ import pytest
 from hypothesis import given, settings, strategies as hst
 from hypothesis.extra import numpy as hnp
 from interval import interval
-from numpy.testing import assert_equal
+from numpy.testing import assert_almost_equal, assert_equal
 
 from lp_nn_robustness_verification import pre_processing
 from lp_nn_robustness_verification.data_acquisition.activation_functions import Sigmoid
@@ -82,20 +82,20 @@ def test_custom_linear_inclusion_z_is_are_correct(
 def test_default_linear_inclusion_has_theta_tuple(
     linear_inclusion_instance: LinearInclusion,
 ) -> None:
-    assert isinstance(linear_inclusion_instance.theta, tuple)
+    assert isinstance(linear_inclusion_instance.theta_is, tuple)
 
 
 def test_default_linear_inclusion_has_theta_tuple_of_tuple(
     linear_inclusion_instance: LinearInclusion,
 ) -> None:
-    for intervall_collection in linear_inclusion_instance.theta:
+    for intervall_collection in linear_inclusion_instance.theta_is:
         assert isinstance(intervall_collection, tuple)
 
 
 def test_default_linear_inclusion_has_theta_tuple_of_tuple_of_intervals(
     linear_inclusion_instance: LinearInclusion,
 ) -> None:
-    for intervall_collection in linear_inclusion_instance.theta:
+    for intervall_collection in linear_inclusion_instance.theta_is:
         for interv in intervall_collection:
             assert isinstance(interv, interval)
 
@@ -103,7 +103,7 @@ def test_default_linear_inclusion_has_theta_tuple_of_tuple_of_intervals(
 def test_default_linear_inclusion_theta_are_correct(
     linear_inclusion_instance: LinearInclusion,
 ) -> None:
-    assert linear_inclusion_instance.theta == (
+    assert linear_inclusion_instance.theta_is == (
         (
             interval([0.0, 1.0]),
             interval([0.0, 1.0]),
@@ -133,13 +133,19 @@ def test_default_linear_inclusion_xi_is_start_with_similar_length_to_inputs_dime
 def test_default_linear_inclusion_xi_is_are_correct(
     linear_inclusion_instance: LinearInclusion,
 ) -> None:
-    assert_equal(linear_inclusion_instance.xi_is, np.array([[0.5, 0.5]]))
+    assert_almost_equal(
+        linear_inclusion_instance.xi_is, np.array([[0.615529, 0.615529]]), decimal=6
+    )
 
 
 def test_custom_linear_inclusion_xi_is_are_correct(
     custom_linear_inclusion_instance: LinearInclusion,
 ) -> None:
-    assert_equal(custom_linear_inclusion_instance.xi_is, np.array([[7.5, 11.5]]))
+    assert_almost_equal(
+        custom_linear_inclusion_instance.xi_is,
+        np.array([[0.994493, 0.999544]]),
+        decimal=6,
+    )
 
 
 def test_default_linear_inclusion_has_r_is_tuple(
@@ -168,8 +174,8 @@ def test_default_linear_inclusion_r_is_are_correct(
 ) -> None:
     assert linear_inclusion_instance.r_is == (
         (
-            interval([-0.23996118730265184, 0.22610110352894755]),
-            interval([-0.23996118730265184, 0.22610110352894755]),
+            interval([-0.23676006402148245, 0.22203755424456453]),
+            interval([-0.23676006402148245, 0.22203755424456453]),
         ),
     )
 
