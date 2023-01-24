@@ -36,3 +36,49 @@ identifiers:
       version, please check the README or the Zenodo webpage.
     type: doi
     value: "10.5281/zenodo.7551372"
+references:
+  - authors:
+      - given-names: Stephen
+        family-names: Maher
+      - given-names: Matthias
+        family-names: Miltenberger
+      - given-names: Jo{\~{a}}o
+        family-names: Pedroso
+      - given-names: Pedro
+        family-names: Pedroso
+      - given-names: Daniel
+        family-names: Rehfeldt
+      - given-names: Robert
+        family-names: Schwarz
+      - given-names: Felipe
+        family-names: Serrano
+    title: >-
+      PySCIPOpt: Mathematical Programming in Python with the SCIP Optimization Suite
+    type: article
+    doi: 10.1007/978-3-319-42432-3_37
+    date-released: 2016-07-06
+    repository: https://doi.org/10.1007/978-3-319-42432-3_37
+    repository-code: https://github.com/scipopt/PySCIPOpt
+  - authors:
+      - given-names: Tanja
+        family-names: Dorst
+        affiliation: ZeMA gGmbH
+        orcid: 'https://orcid.org/0000-0001-9756-9014'
+      - given-names: Maximilian
+        family-names: Gruber
+        email: maximilian.gruber@ptb.de
+        affiliation: Physikalisch-Technische Bundesanstalt
+      - given-names: Anupam Prasad
+        family-names: Vedurmudi
+        email: anupam.vedurmudi@ptb.de
+        affiliation: Physikalisch-Technische Bundesanstalt
+    title: >-
+      Sensor data set of one electromechanical cylinder at ZeMA
+      testbed (ZeMA DAQ and Smart-Up Unit)
+    type: data
+    doi: 10.5281/zenodo.5185953
+    date-released: 2021-09-10
+    repository: https://doi.org/10.5281/zenodo.5185953
+    repository-artifact: >-
+      https://zenodo.org/record/5185953/files/axis11_2kHz_ZeMA_PTB_SI.h5?download=1
+    license: CC-BY-4.0
