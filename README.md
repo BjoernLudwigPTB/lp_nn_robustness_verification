@@ -4,12 +4,12 @@
 [![Latest Release](https://img.shields.io/github/v/release/BjoernLudwigPTB/lp_nn_robustness_verification?label=Latest%20release)](https://github.com/BjoernLudwigPTB/lp_nn_robustness_verification/releases/latest)
 [![DOI](https://zenodo.org/badge/587113361.svg)](https://zenodo.org/badge/latestdoi/587113361)
 
-This is the code written in conjunction with the second part of my Master's thesis on 
-GUM-compliant neural network robustness verification. The code was written for 
-_Python 3.10_.
+This is the code written in conjunction with the second part of [the author's Master's 
+thesis on GUM-compliant neural network robustness
+verification](https://gitlab1.ptb.de/ludwig10_masters_thesis/gum-compliant_neural_network_robustness_verification).
+The code was written for _Python 3.10_.
 
-The final submission date is 23. January 2023. Until then, this code base will be 
-subject to constant change.
+The final submission date was 23. January 2023.
 
 ## Getting started
 
